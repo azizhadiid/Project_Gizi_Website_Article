@@ -48,17 +48,17 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="index.html" class="active">Beranda<br></a></li>
-                    <li><a href="about.html">Tentang Kami</a></li>
-                    <li><a href="courses.html">Artikel Gizi</a></li>
-                    <li><a href="trainers.html">Cek Status Gizi</a></li>
-                    <li><a href="events.html">Tips</a></li>
-                    <li><a href="pricing.html">Kontak</a></li>
+                    <li><a href="{{url('/')}}" class="active">Beranda<br></a></li>
+                    <li><a href="{{url('/about')}}">Tentang Kami</a></li>
+                    <li><a href="{{url('/artikel')}}">Artikel Gizi</a></li>
+                    <li><a href="{{url('/status')}}">Cek Status Gizi</a></li>
+                    <li><a href="{{url('/tips')}}">Tips</a></li>
+                    <li><a href="p{{url('/konsul')}}">Konsultasi</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="courses.html">Masuk</a>
+            <a class="btn-getstarted" href="{{url('/artikel')}}">Masuk</a>
 
         </div>
     </header>
@@ -106,7 +106,7 @@
                             <li><i class="bi bi-check-circle"></i> <span>Minum air putih yang cukup untuk menjaga
                                     hidrasi tubuh sepanjang hari.</span></li>
                         </ul>
-                        <a href="nutrition-details.html" class="read-more"><span>Pelajari Lebih Lanjut</span><i
+                        <a href="{{url('/login')}}" class="read-more"><span>Pelajari Lebih Lanjut</span><i
                                 class="bi bi-arrow-right"></i></a>
                     </div>
                 </div>
@@ -131,7 +131,7 @@
                                 keluarga Anda.
                             </p>
                             <div class="text-center">
-                                <a href="#" class="more-btn"><span>Pelajari Lebih Lanjut</span> <i
+                                <a href="{{url('/login')}}" class="more-btn"><span>Pelajari Lebih Lanjut</span> <i
                                         class="bi bi-chevron-right"></i></a>
                             </div>
                         </div>
@@ -142,7 +142,7 @@
 
                             <div class="col-xl-4">
                                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                                    <i class="bi bi-clipboard-data"></i>
+                                    <i class="bi bi-bar-chart-line"></i>
                                     <h4>Memahami Kebutuhan Gizi</h4>
                                     <p>Bagaimana memenuhi kebutuhan harian Anda untuk kesehatan tubuh.</p>
                                 </div>
@@ -150,7 +150,7 @@
 
                             <div class="col-xl-4" data-aos="fade-up" data-aos-delay="300">
                                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                                    <i class="bi bi-gem"></i>
+                                    <i class="bi bi-nut"></i>
                                     <h4>Makanan Bergizi Berkualitas</h4>
                                     <p>Temukan sumber makanan terbaik yang kaya akan vitamin, mineral, dan serat.</p>
                                 </div>
@@ -158,7 +158,7 @@
 
                             <div class="col-xl-4" data-aos="fade-up" data-aos-delay="400">
                                 <div class="icon-box d-flex flex-column justify-content-center align-items-center">
-                                    <i class="bi bi-inboxes"></i>
+                                    <i class="bi bi-heart-pulse"></i>
                                     <h4>Tips Hidup Sehat</h4>
                                     <p>Dapatkan tips praktis untuk menjaga pola makan sehat yang mudah diterapkan
                                         sehari-hari.
@@ -177,294 +177,151 @@
 
         <!-- Features Section -->
         <section id="features" class="features section">
-
             <div class="container">
-
                 <div class="row gy-4">
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="100">
                         <div class="features-item">
-                            <i class="bi bi-eye" style="color: #ffbb2c;"></i>
-                            <h3><a href="" class="stretched-link">Lorem Ipsum</a></h3>
+                            <i class="bi bi-journal-text" style="color: #ffbb2c;"></i> <!-- Artikel Gizi -->
+                            <h3><a href="" class="stretched-link">Artikel Gizi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="200">
                         <div class="features-item">
-                            <i class="bi bi-infinity" style="color: #5578ff;"></i>
-                            <h3><a href="" class="stretched-link">Dolor Sitema</a></h3>
+                            <i class="bi bi-clipboard-check" style="color: #5578ff;"></i> <!-- Cek Status Gizi -->
+                            <h3><a href="" class="stretched-link">Cek Status Gizi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="300">
                         <div class="features-item">
-                            <i class="bi bi-mortarboard" style="color: #e80368;"></i>
-                            <h3><a href="" class="stretched-link">Sed perspiciatis</a></h3>
+                            <i class="bi bi-lightbulb" style="color: #e80368;"></i> <!-- Tips -->
+                            <h3><a href="" class="stretched-link">Tips</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                     <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="400">
                         <div class="features-item">
-                            <i class="bi bi-nut" style="color: #e361ff;"></i>
-                            <h3><a href="" class="stretched-link">Magni Dolores</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="500">
-                        <div class="features-item">
-                            <i class="bi bi-shuffle" style="color: #47aeff;"></i>
-                            <h3><a href="" class="stretched-link">Nemo Enim</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="600">
-                        <div class="features-item">
-                            <i class="bi bi-star" style="color: #ffa76e;"></i>
-                            <h3><a href="" class="stretched-link">Eiusmod Tempor</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="700">
-                        <div class="features-item">
-                            <i class="bi bi-x-diamond" style="color: #11dbcf;"></i>
-                            <h3><a href="" class="stretched-link">Midela Teren</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="800">
-                        <div class="features-item">
-                            <i class="bi bi-camera-video" style="color: #4233ff;"></i>
-                            <h3><a href="" class="stretched-link">Pira Neve</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="900">
-                        <div class="features-item">
-                            <i class="bi bi-command" style="color: #b2904f;"></i>
-                            <h3><a href="" class="stretched-link">Dirada Pack</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1000">
-                        <div class="features-item">
-                            <i class="bi bi-dribbble" style="color: #b20969;"></i>
-                            <h3><a href="" class="stretched-link">Moton Ideal</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1100">
-                        <div class="features-item">
-                            <i class="bi bi-activity" style="color: #ff5828;"></i>
-                            <h3><a href="" class="stretched-link">Verdo Park</a></h3>
-                        </div>
-                    </div><!-- End Feature Item -->
-
-                    <div class="col-lg-3 col-md-4" data-aos="fade-up" data-aos-delay="1200">
-                        <div class="features-item">
-                            <i class="bi bi-brightness-high" style="color: #29cc61;"></i>
-                            <h3><a href="" class="stretched-link">Flavor Nivelanda</a></h3>
+                            <i class="bi bi-envelope" style="color: #e361ff;"></i> <!-- Konsultasi -->
+                            <h3><a href="" class="stretched-link">Konsultasi</a></h3>
                         </div>
                     </div><!-- End Feature Item -->
 
                 </div>
-
             </div>
-
         </section><!-- /Features Section -->
 
-        <!-- Courses Section -->
-        <section id="courses" class="courses section">
+        <!-- Articel Section -->
+        <section id="articles" class="articles section">
 
             <!-- Section Title -->
             <div class="container section-title" data-aos="fade-up">
-                <h2>Courses</h2>
-                <p>Popular Courses</p>
+                <h2>Artikel Gizi</h2>
+                <p>Informasi Terbaru Seputar Kesehatan dan Nutrisi</p>
             </div><!-- End Section Title -->
 
             <div class="container">
-
                 <div class="row">
 
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="course-item">
-                            <img src="assets/img/course-1.jpg" class="img-fluid" alt="...">
-                            <div class="course-content">
+                        <div class="article-item">
+                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="img-fluid" alt="...">
+                            <div class="article-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Web Development</p>
-                                    <p class="price">$169</p>
+                                    <p class="category">Kebutuhan Gizi</p>
                                 </div>
 
-                                <h3><a href="course-details.html">Website Design</a></h3>
-                                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id
-                                    facere quia quae dolores dolorem tempore.</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="assets/img/trainers/trainer-1-2.jpg" class="img-fluid" alt="">
-                                        <a href="" class="trainer-link">Antonio</a>
+                                <h3><a href="">Pentingnya Nutrisi Seimbang untuk Kesehatan</a></h3>
+                                <p class="description">Memahami peran nutrisi dalam menjaga kesehatan tubuh dan
+                                    meningkatkan daya tahan.</p>
+                                <div class="author d-flex justify-content-between align-items-center">
+                                    <div class="author-profile d-flex align-items-center">
+                                        <img src="assets/img/authors/author-1.jpg" class="img-fluid" alt="">
+                                        <a href="" class="author-link">Dr. Arif</a>
                                     </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bi bi-person user-icon"></i>&nbsp;50
-                                        &nbsp;&nbsp;
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;65
+                                    <div class="likes d-flex align-items-center">
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;120
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End Course Item-->
+                    </div> <!-- End Article Item-->
 
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
                         data-aos-delay="200">
-                        <div class="course-item">
-                            <img src="assets/img/course-2.jpg" class="img-fluid" alt="...">
-                            <div class="course-content">
+                        <div class="article-item">
+                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="img-fluid" alt="...">
+                            <div class="article-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Marketing</p>
-                                    <p class="price">$250</p>
+                                    <p class="category">Makanan Sehat</p>
                                 </div>
 
-                                <h3><a href="course-details.html">Search Engine Optimization</a></h3>
-                                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id
-                                    facere quia quae dolores dolorem tempore.</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="assets/img/trainers/trainer-2-2.jpg" class="img-fluid" alt="">
-                                        <a href="" class="trainer-link">Lana</a>
+                                <h3><a href="">Makanan yang Membantu Meningkatkan Imun Tubuh</a>
+                                </h3>
+                                <p class="description">Menjelajahi pilihan makanan yang kaya akan vitamin dan
+                                    antioksidan untuk mendukung sistem imun.</p>
+                                <div class="author d-flex justify-content-between align-items-center">
+                                    <div class="author-profile d-flex align-items-center">
+                                        <img src="assets/img/authors/author-2.jpg" class="img-fluid" alt="">
+                                        <a href="" class="author-link">Dr. Siti</a>
                                     </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bi bi-person user-icon"></i>&nbsp;35
-                                        &nbsp;&nbsp;
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;42
+                                    <div class="likes d-flex align-items-center">
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;98
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End Course Item-->
+                    </div> <!-- End Article Item-->
 
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in"
                         data-aos-delay="300">
-                        <div class="course-item">
-                            <img src="assets/img/course-3.jpg" class="img-fluid" alt="...">
-                            <div class="course-content">
+                        <div class="article-item">
+                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="img-fluid" alt="...">
+                            <div class="article-content">
                                 <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Content</p>
-                                    <p class="price">$180</p>
+                                    <p class="category">Gaya Hidup Sehat</p>
                                 </div>
 
-                                <h3><a href="course-details.html">Copywriting</a></h3>
-                                <p class="description">Et architecto provident deleniti facere repellat nobis iste. Id
-                                    facere quia quae dolores dolorem tempore.</p>
-                                <div class="trainer d-flex justify-content-between align-items-center">
-                                    <div class="trainer-profile d-flex align-items-center">
-                                        <img src="assets/img/trainers/trainer-3-2.jpg" class="img-fluid" alt="">
-                                        <a href="" class="trainer-link">Brandon</a>
+                                <h3><a href="">Tips Sederhana untuk Pola Makan Sehat</a></h3>
+                                <p class="description">Langkah mudah dan efektif untuk mengatur pola makan agar tetap
+                                    sehat dan seimbang.</p>
+                                <div class="author d-flex justify-content-between align-items-center">
+                                    <div class="author-profile d-flex align-items-center">
+                                        <img src="assets/img/authors/author-3.jpg" class="img-fluid" alt="">
+                                        <a href="" class="author-link">Dr. Budi</a>
                                     </div>
-                                    <div class="trainer-rank d-flex align-items-center">
-                                        <i class="bi bi-person user-icon"></i>&nbsp;20
-                                        &nbsp;&nbsp;
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;85
+                                    <div class="likes d-flex align-items-center">
+                                        <i class="bi bi-heart heart-icon"></i>&nbsp;110
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End Course Item-->
+                    </div> <!-- End Article Item-->
 
                 </div>
-
             </div>
 
-        </section><!-- /Courses Section -->
-
-        <!-- Trainers Index Section -->
-        <section id="trainers-index" class="section trainers-index">
-
-            <div class="container">
-
-                <div class="row">
-
-                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="100">
-                        <div class="member">
-                            <img src="assets/img/trainers/trainer-1.jpg" class="img-fluid" alt="">
-                            <div class="member-content">
-                                <h4>Walter White</h4>
-                                <span>Web Development</span>
-                                <p>
-                                    Magni qui quod omnis unde et eos fuga et exercitationem. Odio veritatis perspiciatis
-                                    quaerat qui aut aut aut
-                                </p>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="200">
-                        <div class="member">
-                            <img src="assets/img/trainers/trainer-2.jpg" class="img-fluid" alt="">
-                            <div class="member-content">
-                                <h4>Sarah Jhinson</h4>
-                                <span>Marketing</span>
-                                <p>
-                                    Repellat fugiat adipisci nemo illum nesciunt voluptas repellendus. In architecto
-                                    rerum rerum temporibus
-                                </p>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                    <div class="col-lg-4 col-md-6 d-flex" data-aos="fade-up" data-aos-delay="300">
-                        <div class="member">
-                            <img src="assets/img/trainers/trainer-3.jpg" class="img-fluid" alt="">
-                            <div class="member-content">
-                                <h4>William Anderson</h4>
-                                <span>Content</span>
-                                <p>
-                                    Voluptas necessitatibus occaecati quia. Earum totam consequuntur qui porro et
-                                    laborum toro des clara
-                                </p>
-                                <div class="social">
-                                    <a href=""><i class="bi bi-twitter-x"></i></a>
-                                    <a href=""><i class="bi bi-facebook"></i></a>
-                                    <a href=""><i class="bi bi-instagram"></i></a>
-                                    <a href=""><i class="bi bi-linkedin"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div><!-- End Team Member -->
-
-                </div>
-
-            </div>
-
-        </section><!-- /Trainers Index Section -->
+        </section>
+        <!-- /Courses Section -->
 
     </main>
 
     <footer id="footer" class="footer position-relative light-background">
-
         <div class="container footer-top">
             <div class="row gy-4">
                 <div class="col-lg-4 col-md-6 footer-about">
                     <a href="index.html" class="logo d-flex align-items-center">
-                        <span class="sitename">Mentor</span>
+                        <span class="sitename">GIZIKU</span>
                     </a>
                     <div class="footer-contact pt-3">
-                        <p>A108 Adam Street</p>
-                        <p>New York, NY 535022</p>
-                        <p class="mt-3"><strong>Phone:</strong> <span>+1 5589 55488 55</span></p>
-                        <p><strong>Email:</strong> <span>info@example.com</span></p>
+                        <p>Jl. Sehat No. 108</p>
+                        <p>Jambi, Indonesia</p>
+                        <p class="mt-3"><strong>Phone:</strong> <span>+62 8123 4567 890</span></p>
+                        <p><strong>Email:</strong> <span>info@gizisehat.com</span></p>
                     </div>
                     <div class="social-links d-flex mt-4">
-                        <a href=""><i class="bi bi-twitter-x"></i></a>
+                        <a href=""><i class="bi bi-twitter"></i></a>
                         <a href=""><i class="bi bi-facebook"></i></a>
                         <a href=""><i class="bi bi-instagram"></i></a>
                         <a href=""><i class="bi bi-linkedin"></i></a>
@@ -472,54 +329,49 @@
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Useful Links</h4>
+                    <h4>Informasi Berguna</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Terms of service</a></li>
-                        <li><a href="#">Privacy policy</a></li>
+                        <li><a href="#">Beranda</a></li>
+                        <li><a href="#">Tentang Kami</a></li>
+                        <li><a href="#">Panduan Gizi</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Konsultasi</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-2 col-md-3 footer-links">
-                    <h4>Our Services</h4>
+                    <h4>Layanan Kami</h4>
                     <ul>
-                        <li><a href="#">Web Design</a></li>
-                        <li><a href="#">Web Development</a></li>
-                        <li><a href="#">Product Management</a></li>
-                        <li><a href="#">Marketing</a></li>
-                        <li><a href="#">Graphic Design</a></li>
+                        <li><a href="#">Artikel Gizi</a></li>
+                        <li><a href="#">Cek Status Gizi</a></li>
+                        <li><a href="#">Tips Sehat</a></li>
+                        <li><a href="#">Konsultasi Ahli Gizi</a></li>
                     </ul>
                 </div>
 
                 <div class="col-lg-4 col-md-12 footer-newsletter">
-                    <h4>Our Newsletter</h4>
-                    <p>Subscribe to our newsletter and receive the latest news about our products and services!</p>
+                    <h4>Newsletter Kami</h4>
+                    <p>Berlangganan untuk mendapatkan tips gizi dan informasi kesehatan terbaru.</p>
                     <form action="forms/newsletter.php" method="post" class="php-email-form">
-                        <div class="newsletter-form"><input type="email" name="email"><input type="submit"
-                                value="Subscribe"></div>
-                        <div class="loading">Loading</div>
+                        <div class="newsletter-form">
+                            <input type="email" name="email">
+                            <input type="submit" value="Berlangganan">
+                        </div>
+                        <div class="loading">Memproses...</div>
                         <div class="error-message"></div>
-                        <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+                        <div class="sent-message">Permintaan langganan Anda telah dikirim. Terima kasih!</div>
                     </form>
                 </div>
-
             </div>
         </div>
 
         <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Mentor</strong> <span>All Rights Reserved</span>
-            </p>
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">GIZIKU</strong> <span>Semua Hak
+                    Dilindungi</span></p>
             <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you've purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+                Dirancang oleh <a href="#">Tim GIZIKU</a>
             </div>
         </div>
-
     </footer>
 
     <!-- Scroll Top -->
