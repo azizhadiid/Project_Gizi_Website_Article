@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <title>Index - Mentor Bootstrap Template</title>
+    <title>Giziku-Welcome</title>
     <meta name="description" content="">
     <meta name="keywords" content="">
 
@@ -58,7 +58,7 @@
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
 
-            <a class="btn-getstarted" href="{{url('/artikel')}}">Masuk</a>
+            <a class="btn-getstarted" href="{{url('/login')}}">Masuk</a>
 
         </div>
     </header>
@@ -365,7 +365,7 @@
             </div>
         </div>
 
-        <div class="container copyright text-center mt-4">
+        <div class="text-center mt-5">
             <p>© <span>Copyright</span> <strong class="px-1 sitename">GIZIKU</strong> <span>Semua Hak
                     Dilindungi</span></p>
             <div class="credits">
