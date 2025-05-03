@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
@@ -10,3 +11,6 @@ Route::get('/', function () {
 
 // Khusu User
 Route::get('/beranda', [HomeController::class, 'index']);
+
+// Khusu Admin
+Route::get('/dashboard', [AdminController::class, 'index']);
