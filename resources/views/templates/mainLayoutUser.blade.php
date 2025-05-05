@@ -48,12 +48,12 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{url('/')}}" class="active">Beranda<br></a></li>
-                    <li><a href="{{url('/about')}}">Tentang Kami</a></li>
-                    <li><a href="{{url('/artikel')}}">Artikel Gizi</a></li>
-                    <li><a href="{{url('/status')}}">Cek Status Gizi</a></li>
-                    <li><a href="{{url('/tips')}}">Tips</a></li>
-                    <li><a href="p{{url('/konsul')}}">Konsultasi</a></li>
+                    <li><a href="{{url('/beranda')}}" class="{{ request()->is('/beranda') ? 'active' : '' }}">Beranda<br></a></li>
+                    <li><a href="{{url('/about')}}" class="{{ request()->is('/about') ? 'active' : '' }}">Tentang Kami</a></li>
+                    <li><a href="{{url('/artikel')}}" class="{{ request()->is('/artikel') ? 'active' : '' }}">Artikel Gizi</a></li>
+                    <li><a href="{{url('/status')}}" class="{{ request()->is('/status') ? 'active' : '' }}">Cek Status Gizi</a></li>
+                    <li><a href="{{url('/tips')}}" class="{{ request()->is('/tips') ? 'active' : '' }}">Tips</a></li>
+                    <li><a href="p{{url('/konsul')}}" class="{{ request()->is('/konsul') ? 'active' : '' }}">Konsultasi</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
