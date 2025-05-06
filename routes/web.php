@@ -1,10 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AuthController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProfileController;
 
 // Akses Landing Page 
 Route::get('/', function () {
@@ -17,6 +18,7 @@ Route::get('/akun', [AkunController::class, 'index']);
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
+Route::get('/akun/admin', [AdminProfileController::class, 'index']);
 
 // Khusu Auth
 Route::get('/login', [AuthController::class, 'login']);
