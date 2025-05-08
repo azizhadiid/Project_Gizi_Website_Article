@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AuthController;
@@ -15,6 +16,7 @@ Route::get('/', function () {
 // Khusu User
 Route::get('/beranda', [HomeController::class, 'index']);
 Route::get('/akun', [AkunController::class, 'index']);
+Route::get('/about', [AboutController::class, 'index']);
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
