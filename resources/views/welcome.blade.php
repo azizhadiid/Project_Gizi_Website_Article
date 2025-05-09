@@ -224,80 +224,93 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="article-item">
-                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="img-fluid" alt="...">
-                            <div class="article-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Kebutuhan Gizi</p>
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
+                        data-aos-delay="100">
+                        <div class="card shadow rounded-4 overflow-hidden border-0">
+                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="card-img-top"
+                                alt="Nutrisi Seimbang">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="mb-3">
+                                    <span class="badge bg-primary mb-2">Kebutuhan Gizi</span>
+                                    <h5 class="card-title">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
+                                            Pentingnya Nutrisi Seimbang untuk Kesehatan
+                                        </a>
+                                    </h5>
+                                    <p class="card-text text-muted">Memahami peran nutrisi dalam menjaga kesehatan tubuh
+                                        dan
+                                        meningkatkan daya tahan.</p>
                                 </div>
-
-                                <h3><a href="">Pentingnya Nutrisi Seimbang untuk Kesehatan</a></h3>
-                                <p class="description">Memahami peran nutrisi dalam menjaga kesehatan tubuh dan
-                                    meningkatkan daya tahan.</p>
-                                <div class="author d-flex justify-content-between align-items-center">
-                                    <div class="author-profile d-flex align-items-center">
-                                        <img src="assets/img/authors/author-1.jpg" class="img-fluid" alt="">
-                                        <a href="" class="author-link">Dr. Arif</a>
+                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                    <div class="d-flex align-items-center">
+                                        <small class="text-muted">Dr. Arif</small>
                                     </div>
-                                    <div class="likes d-flex align-items-center">
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;120
+                                    <div class="text-muted">
+                                        <i class="bi bi-heart-fill text-danger"></i> 120
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End Article Item-->
+                    </div>
+                    <!-- End Article Item-->
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in"
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
                         data-aos-delay="200">
-                        <div class="article-item">
-                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="img-fluid" alt="...">
-                            <div class="article-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Makanan Sehat</p>
+                        <div class="card shadow rounded-4 overflow-hidden border-0">
+                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="card-img-top" alt="Makanan Imun">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="mb-3">
+                                    <span class="badge bg-warning text-dark mb-2">Makanan Sehat</span>
+                                    <h5 class="card-title">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
+                                            Makanan yang Membantu Meningkatkan Imun Tubuh
+                                        </a>
+                                    </h5>
+                                    <p class="card-text text-muted">Menjelajahi pilihan makanan yang kaya akan vitamin
+                                        dan
+                                        antioksidan untuk mendukung sistem imun.</p>
                                 </div>
-
-                                <h3><a href="">Makanan yang Membantu Meningkatkan Imun Tubuh</a>
-                                </h3>
-                                <p class="description">Menjelajahi pilihan makanan yang kaya akan vitamin dan
-                                    antioksidan untuk mendukung sistem imun.</p>
-                                <div class="author d-flex justify-content-between align-items-center">
-                                    <div class="author-profile d-flex align-items-center">
-                                        <img src="assets/img/authors/author-2.jpg" class="img-fluid" alt="">
-                                        <a href="" class="author-link">Dr. Siti</a>
+                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                    <div class="d-flex align-items-center">
+                                        <small class="text-muted">Dr. Siti</small>
                                     </div>
-                                    <div class="likes d-flex align-items-center">
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;98
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> <!-- End Article Item-->
-
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0" data-aos="zoom-in"
-                        data-aos-delay="300">
-                        <div class="article-item">
-                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="img-fluid" alt="...">
-                            <div class="article-content">
-                                <div class="d-flex justify-content-between align-items-center mb-3">
-                                    <p class="category">Gaya Hidup Sehat</p>
-                                </div>
-
-                                <h3><a href="">Tips Sederhana untuk Pola Makan Sehat</a></h3>
-                                <p class="description">Langkah mudah dan efektif untuk mengatur pola makan agar tetap
-                                    sehat dan seimbang.</p>
-                                <div class="author d-flex justify-content-between align-items-center">
-                                    <div class="author-profile d-flex align-items-center">
-                                        <img src="assets/img/authors/author-3.jpg" class="img-fluid" alt="">
-                                        <a href="" class="author-link">Dr. Budi</a>
-                                    </div>
-                                    <div class="likes d-flex align-items-center">
-                                        <i class="bi bi-heart heart-icon"></i>&nbsp;110
+                                    <div class="text-muted">
+                                        <i class="bi bi-heart-fill text-danger"></i> 98
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> <!-- End Article Item-->
+                    </div>
+                    <!-- End Article Item-->
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
+                        data-aos-delay="200">
+                        <div class="card shadow rounded-4 overflow-hidden border-0">
+                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="card-img-top" alt="Makanan Imun">
+                            <div class="card-body d-flex flex-column justify-content-between">
+                                <div class="mb-3">
+                                    <span class="badge bg-success text-dark mb-2">Gaya Hidup Sehat</span>
+                                    <h5 class="card-title">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
+                                            Tips Sederhana untuk Pola Makan Sehat
+                                        </a>
+                                    </h5>
+                                    <p class="card-text text-muted">Langkah mudah dan efektif untuk mengatur pola makan
+                                        agar
+                                        tetap sehat dan seimbang.</p>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                    <div class="d-flex align-items-center">
+                                        <small class="text-muted">Dr. Budi</small>
+                                    </div>
+                                    <div class="text-muted">
+                                        <i class="bi bi-heart-fill text-danger"></i> 110
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Article Item-->
 
                 </div>
             </div>
