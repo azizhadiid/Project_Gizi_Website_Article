@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class AdminProfile extends Model
+{
+    use HasFactory;
+
+    protected $table = 'profile_admin';
+
+    protected $fillable = [
+        'user_id',
+        'first_name',
+        'last_name',
+        'phone',
+        'address',
+        'email',
+        'position',
+        'profile_picture',
+        'experience',
+        'note',
+    ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+}

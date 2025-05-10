@@ -29,9 +29,9 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
-                                <img src="{{ asset('assets-admin/images/logo-dark.svg') }}">
+                                <img src="{{ asset('assets-admin/images/logo-dark.png') }}">
                             </div>
-                            <h4>Atur Ulang Kata Sandi</h4>
+                            <h4 style="margin-top: -20px">Atur Ulang Kata Sandi</h4>
                             <h6 class="font-weight-light">Silakan buat kata sandi baru untuk akun Giziku Anda</h6>
                             <form class="pt-3" method="POST" action="/reset-password">
                                 <!-- Tambahkan token dan email jika diperlukan -->

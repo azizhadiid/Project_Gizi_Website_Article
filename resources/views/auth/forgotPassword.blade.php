@@ -29,9 +29,9 @@
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
                             <div class="brand-logo">
-                                <img src="{{ asset('assets-admin/images/logo-dark.svg') }}">
+                                <img src="{{ asset('assets-admin/images/logo-dark.png') }}">
                             </div>
-                            <h4>Lupa Kata Sandi?</h4>
+                            <h4 style="margin-top: -20px">Lupa Kata Sandi?</h4>
                             <h6 class="font-weight-light">Masukkan emailmu untuk mereset kata sandi</h6>
                             <form class="pt-3">
                                 <div class="form-group">

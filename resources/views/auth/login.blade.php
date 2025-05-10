@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -18,42 +19,78 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/css/vertical-light-layout/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets-admin/images/favicon.png') }}" />
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="container-scroller">
-      <div class="container-fluid page-body-wrapper full-page-wrapper">
-        <div class="content-wrapper d-flex align-items-center auth">
-          <div class="row flex-grow">
-            <div class="col-lg-4 mx-auto">
-              <div class="auth-form-light text-left p-5">
-                <div class="brand-logo">
-                  <img src="{{ asset('assets-admin/images/logo-dark.svg') }}">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth">
+                <div class="row flex-grow">
+                    <div class="col-lg-4 mx-auto">
+                        <div class="auth-form-light text-left p-5">
+                            <div class="brand-logo">
+                                <img src="{{ asset('assets-admin/images/logo-dark.png') }}">
+                            </div>
+                            <h4 style="margin-top: -20px">Hello! Mulai langkahmu!</h4>
+                            <h6 class="font-weight-light">Masuk Untuk Memulai</h6>
+                            @if ($errors->any())
+                            <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert"
+                                style="width: 100%">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                        <p class="m-0">{{ $error }}</p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @endif
+
+                            {{-- Jika Sukses Login --}}
+                            @if (session('success'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                            {{-- jika Password telah di ubah --}}
+                            @if (session('status'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+
+                            <form method="POST" action="/login" class="pt-3">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
+                                        placeholder="Masukkan Email" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control form-control-lg"
+                                        id="exampleInputPassword1" placeholder="Masukkan Password" name="password" required>
+                                </div>
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <button class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn"
+                                        style="width: 100%" type="submit">Masuk</button>
+                                </div>
+                                <div class="my-2 d-flex justify-content-end align-items-center">
+                                    <a href="/forgot-password" class="auth-link text-black mt-3">Forgot password?</a>
+                                </div>
+                                <div class="text-center mt-4 font-weight-light">Tidak punya akun? <a href="/register"
+                                        class="text-primary">Buat</a>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <h4>Hello! Mulai langkahmu!</h4>
-                <h6 class="font-weight-light">Masuk Untuk Memulai</h6>
-                <form class="pt-3">
-                  <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Masukkan Email">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Masukkan Password">
-                  </div>
-                  <div class="mt-3">
-                    <a class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">Masuk</a>
-                  </div>
-                  <div class="my-2 d-flex justify-content-end align-items-center">
-                    <a href="/forgot-password" class="auth-link text-black mt-3">Forgot password?</a>
-                  </div>
-                  <div class="text-center mt-4 font-weight-light">Tidak punya akun? <a href="/register" class="text-primary">Buat</a>
-                  </div>
-                </form>
-              </div>
             </div>
-          </div>
+            <!-- content-wrapper ends -->
         </div>
-        <!-- content-wrapper ends -->
-      </div>
-      <!-- page-body-wrapper ends -->
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
     <!-- plugins:js -->
@@ -68,5 +105,6 @@
     <script src="{{ asset('assets-admin/js/settings.js') }}"></script>
     <script src="{{ asset('assets-admin/js/todolist.js') }}"></script>
     <!-- endinject -->
-  </body>
+</body>
+
 </html>
