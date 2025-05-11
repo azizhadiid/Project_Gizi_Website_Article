@@ -23,47 +23,63 @@
 
 <!-- ========================= Artikel Cards ========================= -->
 <div class="container py-5">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
 
-        <!-- Card Artikel 1 -->
+    {{-- Search Bar --}}
+    <form action="{{ route('user.artikel') }}" method="GET" class="mb-5">
+        <div class="input-group shadow-sm rounded-pill overflow-hidden" style="background: #f9f9f9;">
+            <input type="text" name="search" class="form-control border-0 px-4 py-3 bg-transparent"
+                placeholder="🔍 Cari artikel menarik hari ini..." value="{{ request('search') }}"
+                style="font-size: 1rem;">
+            <button class="btn btn-dark px-4 rounded-0" type="submit"
+                style="background: linear-gradient(135deg, #00C9A7, #005B41); border: none;">
+                Cari
+            </button>
+        </div>
+    </form>
+
+    {{-- No Results --}}
+    @if($articles->isEmpty())
+    <div class="col-12 d-flex justify-content-center align-items-center flex-column py-5" data-aos="fade-up">
+        <img src="{{ asset('assets/img/illustration/no-results.svg') }}" alt="No Results" class="mb-4"
+            style="max-width: 280px;">
+        <h5 class="text-dark fw-bold mb-2">Ups! Artikel tidak ditemukan</h5>
+        <p class="text-muted mb-0">Coba kata kunci lain yang lebih spesifik atau populer.</p>
+    </div>
+    @endif
+
+    {{-- Article Cards --}}
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        @foreach ($articles as $article)
         <div class="col">
-            <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="100">
-                <img src="{{ asset('assets/img/course-2.jpg') }}" class="card-img-top" alt="Gambar Artikel 1">
+            <div class="card border-0 shadow-sm h-100 rounded-3 overflow-hidden" data-aos="fade-up"
+                style="transition: transform 0.3s ease-in-out;">
+                <img src="{{ asset('img/admin/article/' . $article->cover_image) }}" class="card-img-top"
+                    alt="{{ $article->title }}" style="height: 220px; object-fit: cover;">
                 <div class="card-body">
-                    <p class="text-muted mb-1">Kategori: <span class="badge bg-secondary">Gizi</span></p>
-                    <h5 class="card-title">Judul Artikel Pertama</h5>
-                    <p class="card-text">Deskripsi singkat artikel ini. Memberikan informasi penting mengenai topik gizi yang dibahas.</p>
+                    <h5 class="card-title fw-semibold text-dark">{{ $article->title }}</h5>
+                    <p class="card-text text-muted">
+                        {{ \Illuminate\Support\Str::limit(strip_tags($article->content), 90) }}</p>
                 </div>
-                <div class="card-footer d-flex align-items-center">
-                    <img src="{{ asset('assets/img/person/person-f-12.webp') }}" class="rounded-circle me-2" width="40" height="40" alt="Penulis">
-                    <div>
-                        <small class="text-muted">Maria Doe</small><br>
-                        <small class="text-muted">1 Jan 2022</small>
+                <div class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-3 pb-3">
+                    <div class="d-flex align-items-center">
+                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
+                            style="width: 40px; height: 40px;">
+                            <i class="bi bi-person text-secondary"></i>
+                        </div>
+                        <div>
+                            <small class="text-muted">{{ $article->penulis ?? 'Admin' }}</small><br>
+                            <small
+                                class="text-muted">{{ \Carbon\Carbon::parse($article->published_at)->translatedFormat('d M Y') }}</small>
+                        </div>
                     </div>
+                    <a href="" class="btn btn-sm text-white"
+                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                        Baca
+                    </a>
                 </div>
             </div>
         </div>
-
-        <!-- Card Artikel 2 -->
-        <div class="col">
-            <div class="card h-100 shadow-sm" data-aos="fade-up" data-aos-delay="200">
-                <img src="{{ asset('assets/img/course-3.jpg') }}" class="card-img-top" alt="Gambar Artikel 2">
-                <div class="card-body">
-                    <p class="text-muted mb-1">Kategori: <span class="badge bg-secondary">Gaya Hidup</span></p>
-                    <h5 class="card-title">Judul Artikel Kedua</h5>
-                    <p class="card-text">Artikel ini membahas hubungan antara gaya hidup sehat dan pemenuhan kebutuhan nutrisi harian.</p>
-                </div>
-                <div class="card-footer d-flex align-items-center">
-                    <div>
-                        <small class="text-muted">Allisa Mayer</small><br>
-                        <small class="text-muted">5 Jun 2022</small>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Tambahkan card lainnya sesuai kebutuhan -->
-
+        @endforeach
     </div>
 </div>
 <!-- ========================= End Artikel Cards ========================= -->

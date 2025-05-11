@@ -13,7 +13,39 @@
                     Halaman Profil adalah pusat informasi pribadi Anda di GIZIKU. Di sini Anda dapat mengatur data diri,
                     memperbarui informasi kesehatan, serta menyiapkan preferensi untuk konsultasi gizi.
                 </p>
-                <hr class="w-50 mx-auto mb-5 mb-xl-9 border-success">
+                <hr class="w-50 mx-auto mb-5 mb-xl-9 border-success">\
+
+                {{-- Error Alert --}}
+                @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-exclamation-triangle-fill me-2 fs-5"></i>
+                        <div>
+                            <strong>Terjadi kesalahan:</strong>
+                            <ul class="mb-0 mt-1">
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
+                {{-- Success Alert --}}
+                @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill me-2 fs-5"></i>
+                        <div>
+                            {{ session('success') }}
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -64,17 +96,20 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="overview-tab" data-bs-toggle="tab"
                                     data-bs-target="#overview-tab-pane" type="button" role="tab"
-                                    aria-controls="overview-tab-pane" aria-selected="true" style="color: rgb(12, 141, 98)">Latar Belakang</button>
+                                    aria-controls="overview-tab-pane" aria-selected="true"
+                                    style="color: rgb(12, 141, 98)">Latar Belakang</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
                                     data-bs-target="#profile-tab-pane" type="button" role="tab"
-                                    aria-controls="profile-tab-pane" aria-selected="false" style="color: rgb(12, 141, 98)">Profil</button>
+                                    aria-controls="profile-tab-pane" aria-selected="false"
+                                    style="color: rgb(12, 141, 98)">Profil</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="password-tab" data-bs-toggle="tab"
                                     data-bs-target="#password-tab-pane" type="button" role="tab"
-                                    aria-controls="password-tab-pane" aria-selected="false" style="color: rgb(12, 141, 98)">Reset Password</button>
+                                    aria-controls="password-tab-pane" aria-selected="false"
+                                    style="color: rgb(12, 141, 98)">Reset Password</button>
                             </li>
                         </ul>
                         <div class="tab-content pt-4" id="profileTabContent">
@@ -149,64 +184,70 @@
                             </div>
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
                                 aria-labelledby="profile-tab" tabindex="0">
-                                <form action="#!" class="row gy-3 gy-xxl-4">
+                                <form action="{{ route('akun.update') }}" method="POST" enctype="multipart/form-data"
+                                    class="row gy-3 gy-xxl-4">
                                     <div class="col-12">
                                         <div class="row gy-2">
                                             <label class="col-12 form-label m-0">Foto Profil</label>
                                             <div class="col-12">
-                                                <img src="./assets/img/profile-img-1.jpg" class="img-fluid"
-                                                    alt="Luna John">
+                                                <img src="" class="img-fluid" alt="User Name">
                                             </div>
-                                            <div class="col-12">
-                                                <a href="#!"
-                                                    class="d-inline-block bg-primary link-light lh-1 p-2 rounded">
+                                            <div class="col-12 d-flex gap-2">
+                                                <!-- Tombol Upload -->
+                                                <label for="uploadFoto"
+                                                    class="d-inline-block bg-primary link-light lh-1 p-2 rounded"
+                                                    style="cursor: pointer;">
                                                     <i class="bi bi-upload"></i>
-                                                </a>
-                                                <a href="#!"
-                                                    class="d-inline-block bg-danger link-light lh-1 p-2 rounded">
+                                                </label>
+                                                <input type="file" name="profile_picture" id="uploadFoto"
+                                                    class="d-none">
+
+                                                <!-- Tombol Hapus (opsional fungsinya via JS) -->
+                                                <button type="button"
+                                                    class="d-inline-block bg-danger link-light lh-1 p-2 rounded border-0">
                                                     <i class="bi bi-trash"></i>
-                                                </a>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputFirstName" class="form-label">Nama Depan</label>
-                                        <input type="text" class="form-control" id="inputFirstName" value="Ethan">
+                                        <input type="text" class="form-control" id="inputFirstName" value="" name="first_name">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputLastName" class="form-label">Nama Belakang</label>
-                                        <input type="text" class="form-control" id="inputLastName" value="Leo">
+                                        <input type="text" class="form-control" id="inputLastName" value="" name="last_name">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputEducation" class="form-label">Pendidikan</label>
                                         <input type="text" class="form-control" id="inputEducation"
-                                            value="M.S Computer Science">
+                                            value="" name="education">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputJob" class="form-label">Pekerjaan</label>
-                                        <input type="text" class="form-control" id="inputJob" value="Project Manager">
+                                        <input type="text" class="form-control" id="inputJob" value="" name="job">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="riwayatPenyakit" class="form-label">Riwayat Penyakit</label>
-                                        <input type="text" class="form-control" id="riwayatPenyakit" value="GitHub Inc">
+                                        <textarea type="text" class="form-control" id="riwayatPenyakit" name="disease_history"> </textarea>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputPhone" class="form-label">Phone</label>
-                                        <input type="tel" class="form-control" id="inputPhone" value="+12486798745">
+                                        <input type="text" class="form-control" id="inputPhone" name="phone">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputEmail" class="form-label">Email</label>
                                         <input type="email" class="form-control" id="inputEmail"
-                                            value="leo@example.com">
+                                            name="email">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputAddress" class="form-label">Alamat</label>
                                         <input type="text" class="form-control" id="inputAddress"
-                                            value="Mountain View, California">
+                                            name="address">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputCountry" class="form-label">Negara</label>
-                                        <select class="form-select" id="inputCountry">
+                                        <select class="form-select" id="inputCountry" name="country">
                                             <option value="Afghanistan">Afghanistan</option>
                                             <option value="Åland Islands">Åland Islands</option>
                                             <option value="Albania">Albania</option>
@@ -471,22 +512,22 @@
                                     <div class="col-12 col-md-6">
                                         <label for="inputYouTube" class="form-label">Instagram</label>
                                         <input type="text" class="form-control" id="inputYouTube"
-                                            value="https://www.youtube.com/EthanLeo">
+                                            name="instagram">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputX" class="form-label">X</label>
                                         <input type="text" class="form-control" id="inputX"
-                                            value="https://twitter.com/EthanLeo">
+                                            name="x_account">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputFacebook" class="form-label">Facebook</label>
                                         <input type="text" class="form-control" id="inputFacebook"
-                                            value="https://www.facebook.com/EthanLeo">
+                                            name="facebook">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputLinkedIn" class="form-label">LinkedIn</label>
                                         <input type="text" class="form-control" id="inputLinkedIn"
-                                            value="https://www.linkedin.com/EthanLeo">
+                                            name="linkedin">
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" class="btn btn-success">Submit Perubahan</button>

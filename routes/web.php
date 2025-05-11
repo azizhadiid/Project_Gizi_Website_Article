@@ -16,9 +16,10 @@ Route::get('/', function () {
 
 // Khusu User
 Route::get('/beranda', [HomeController::class, 'index']);
-Route::get('/akun', [AkunController::class, 'index']);
+Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
+Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
 Route::get('/about', [AboutController::class, 'index']);
-Route::get('/artikel', [ArtikelController::class, 'index']);
+Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
