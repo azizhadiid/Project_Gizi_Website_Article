@@ -76,32 +76,69 @@ class ArtikelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show()
     {
-        //
+        $articles = Artikel::with('adminProfile')->get(); // eager load relasi untuk ambil nama penulis
+
+        return view('admin.editArtikel', compact('articles'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Tampilkan form edit
+    public function edit($id)
     {
-        //
+        $article = Artikel::findOrFail($id);
+        return view('admin.formEditArtikel', compact('article'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Proses update
+    public function updateArtikel(Request $request, $id)
     {
-        //
+        $article = Artikel::findOrFail($id);
+
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'penulis' => 'required|string|max:255',
+            'content' => 'nullable|string',
+            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|string|max:255',
+            'published_at' => 'required|string|max:255',
+        ]);
+
+        if ($request->hasFile('cover_image')) {
+            $gambar = $request->file('cover_image');
+            $gambarNama = time() . '_' . $gambar->getClientOriginalName();
+            $gambar->move(public_path('img/admin/article'), $gambarNama);
+
+            // hapus gambar lama
+            if ($article->cover_image && file_exists(public_path('img/admin/article/' . $article->cover_image))) {
+                unlink(public_path('img/admin/article/' . $article->cover_image));
+            }
+
+            $article->cover_image = $gambarNama;
+        }
+
+        $article->update([
+            'title' => $request->title,
+            'penulis' => $request->penulis,
+            'content' => $request->content,
+            'status' => $request->status,
+            'published_at' => $request->published_at
+        ]);
+
+        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    // Proses hapus
+    public function destroy($id)
     {
-        //
+        $article = Artikel::findOrFail($id);
+
+        if ($article->cover_image && file_exists(public_path('img/admin/article/' . $article->cover_image))) {
+            unlink(public_path('img/admin/article/' . $article->cover_image));
+        }
+
+        $article->delete();
+
+        return redirect()->route('artikel.index')->with('success', 'Artikel berhasil dihapus.');
     }
 }

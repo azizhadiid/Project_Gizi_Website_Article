@@ -26,6 +26,11 @@ Route::get('/akun/admin', [AdminProfileController::class, 'index'])->name('admin
 Route::post('/admin/admin', [AdminProfileController::class, 'update'])->name('admin.profile.update');
 Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('artikel.create');
 Route::post('/admin/artikel/simpan', [ArtikelController::class, 'store'])->name('artikel.store');
+Route::get('/admin/artikel/edit', [ArtikelController::class, 'show'])->name('artikel.index');
+Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
+Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+
 
 // Khusu Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');

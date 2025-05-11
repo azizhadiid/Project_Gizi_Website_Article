@@ -24,6 +24,6 @@ class Artikel extends Model
 
     public function adminProfile()
     {
-        return $this->belongsTo(AdminProfile::class);
+        return $this->belongsTo(AdminProfile::class, 'profile_admin_id');
     }
 }
