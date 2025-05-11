@@ -24,6 +24,8 @@ Route::get('/artikel', [ArtikelController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'index']);
 Route::get('/akun/admin', [AdminProfileController::class, 'index'])->name('admin.profile.show');
 Route::post('/admin/admin', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('artikel.create');
+Route::post('/admin/artikel/simpan', [ArtikelController::class, 'store'])->name('artikel.store');
 
 // Khusu Auth
 Route::get('/login', [AuthController::class, 'login'])->name('login');

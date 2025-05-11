@@ -94,20 +94,20 @@
               <span class="nav-link">Dashboard</span>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="/dashboard">
                 <span class="menu-title">Dashboard</span>
                 <i class="icon-screen-desktop menu-icon"></i>
               </a>
             </li>
             <li class="nav-item nav-category"><span class="nav-link">Artikel</span></li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="/admin/artikel/tambah">
                 <span class="menu-title">Tambah Artikel</span>
                 <i class="icon-note menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
+              <a class="nav-link" href="/admin/artikel/edit">
                 <span class="menu-title">Edit Artikel</span>
                 <i class="icon-docs menu-icon"></i>
               </a>
