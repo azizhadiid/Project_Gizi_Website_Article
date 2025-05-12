@@ -33,7 +33,39 @@
                             </div>
                             <h4 style="margin-top: -20px">Atur Ulang Kata Sandi</h4>
                             <h6 class="font-weight-light">Silakan buat kata sandi baru untuk akun Giziku Anda</h6>
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert"
+                                style="width: 100%">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                        <p class="m-0">{{ $error }}</p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @endif
+
+                            {{-- Jika Sukses Login --}}
+                            @if (session('success'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                            {{-- jika Password telah di ubah --}}
+                            @if (session('status'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+
                             <form class="pt-3" method="POST" action="/reset-password">
+                                @csrf
                                 <!-- Tambahkan token dan email jika diperlukan -->
                                 <input type="hidden" name="token" value="{{ request()->token }}">
                                 <div class="form-group">

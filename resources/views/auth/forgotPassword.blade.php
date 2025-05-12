@@ -33,14 +33,46 @@
                             </div>
                             <h4 style="margin-top: -20px">Lupa Kata Sandi?</h4>
                             <h6 class="font-weight-light">Masukkan emailmu untuk mereset kata sandi</h6>
-                            <form class="pt-3">
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert"
+                                style="width: 100%">
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-exclamation-circle-fill me-2"></i>
+                                    <div>
+                                        @foreach ($errors->all() as $error)
+                                        <p class="m-0">{{ $error }}</p>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                    aria-label="Close"></button>
+                            </div>
+                            @endif
+
+                            {{-- Jika Sukses Login --}}
+                            @if (session('success'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('success') }}
+                            </div>
+                            @endif
+
+                            {{-- jika Password telah di ubah --}}
+                            @if (session('status'))
+                            <div class="alert alert-success" style="width: 100%">
+                                {{ session('status') }}
+                            </div>
+                            @endif
+
+                            <form action="/forgot-password" method="POST" class="pt-3">
+                                @csrf
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"
-                                        placeholder="Masukkan Email">
+                                        placeholder="Masukkan Email" name="email">
                                 </div>
-                                <div class="mt-3">
-                                    <a class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn"
-                                        href="#">Kirim Tautan Reset</a>
+                                <div class="mt-3 d-flex justify-content-center">
+                                    <button class="btn d-grid btn-primary btn-lg font-weight-medium auth-form-btn"
+                                        style="width: 100%" type="submit">Kirim Tautan Reset</button>
                                 </div>
                                 <div class="my-2 d-flex justify-content-start align-items-center">
                                     <a href="/login" class="auth-link text-black mt-3">Kembali ke Halaman Masuk</a>

@@ -13,8 +13,10 @@ class AkunController extends Controller
      */
     public function index()
     {
-        $user = Auth::user()->user; // Mengambil admin profile dari user yang login
-        return view('akun', compact('user'));
+        $user = Auth::user();
+        $userProfile = $user->userProfile;
+
+        return view('akun', compact('user', 'userProfile'));
     }
 
     /**

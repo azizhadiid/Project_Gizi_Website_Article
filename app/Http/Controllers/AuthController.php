@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+
 
 
 class AuthController extends Controller
@@ -21,11 +24,6 @@ class AuthController extends Controller
     public function register()
     {
         return view('auth.register');
-    }
-
-    public function forgotPassword()
-    {
-        return view('auth.forgotPassword');
     }
 
     public function resetPassword()
@@ -81,35 +79,24 @@ class AuthController extends Controller
         return back()->withErrors(['email' => 'Login Invalid'])->onlyInput('email');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function changePassword(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $user = Auth::user();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if (!Hash::check($request->current_password, $user->password)) {
+            throw ValidationException::withMessages([
+                'current_password' => 'Password lama salah.',
+            ]);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return back()->with('success', 'Password berhasil diubah.');
     }
 }
