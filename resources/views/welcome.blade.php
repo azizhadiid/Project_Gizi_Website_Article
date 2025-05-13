@@ -224,88 +224,111 @@
             <div class="container">
                 <div class="row">
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
-                        data-aos-delay="100">
-                        <div class="card shadow rounded-4 overflow-hidden border-0">
-                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="card-img-top"
-                                alt="Nutrisi Seimbang">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
+                        style="transition: transform 0.3s ease-in-out;">
+                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
+                                style="height: 220px; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div class="mb-3">
-                                    <span class="badge bg-primary mb-2">Kebutuhan Gizi</span>
-                                    <h5 class="card-title">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
-                                            Pentingnya Nutrisi Seimbang untuk Kesehatan
-                                        </a>
+                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
+                                    <h5 class="card-title fw-semibold text-dark">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
+                                            Mengelola Stres dengan Lebih Baik</a>
                                     </h5>
-                                    <p class="card-text text-muted">Memahami peran nutrisi dalam menjaga kesehatan tubuh
-                                        dan
-                                        meningkatkan daya tahan.</p>
+                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
+                                        meningkatkan kualitas hidup Anda.</p>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <div
+                                    class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
                                     <div class="d-flex align-items-center">
-                                        <small class="text-muted">Dr. Arif</small>
+                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-person text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted">Psikolog Nina</small><br>
+                                            <small class="text-muted">10 Mei 2025</small>
+                                        </div>
                                     </div>
-                                    <div class="text-muted">
-                                        <i class="bi bi-heart-fill text-danger"></i> 120
-                                    </div>
+                                    <a href="#" class="btn btn-sm text-white"
+                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                                        Baca
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- End Article Item-->
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
-                        data-aos-delay="200">
-                        <div class="card shadow rounded-4 overflow-hidden border-0">
-                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="card-img-top" alt="Makanan Imun">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
+                        style="transition: transform 0.3s ease-in-out;">
+                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
+                                style="height: 220px; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div class="mb-3">
-                                    <span class="badge bg-warning text-dark mb-2">Makanan Sehat</span>
-                                    <h5 class="card-title">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
-                                            Makanan yang Membantu Meningkatkan Imun Tubuh
-                                        </a>
+                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
+                                    <h5 class="card-title fw-semibold text-dark">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
+                                            Mengelola Stres dengan Lebih Baik</a>
                                     </h5>
-                                    <p class="card-text text-muted">Menjelajahi pilihan makanan yang kaya akan vitamin
-                                        dan
-                                        antioksidan untuk mendukung sistem imun.</p>
+                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
+                                        meningkatkan kualitas hidup Anda.</p>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <div
+                                    class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
                                     <div class="d-flex align-items-center">
-                                        <small class="text-muted">Dr. Siti</small>
+                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-person text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted">Psikolog Nina</small><br>
+                                            <small class="text-muted">10 Mei 2025</small>
+                                        </div>
                                     </div>
-                                    <div class="text-muted">
-                                        <i class="bi bi-heart-fill text-danger"></i> 98
-                                    </div>
+                                    <a href="#" class="btn btn-sm text-white"
+                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                                        Baca
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <!-- End Article Item-->
 
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="zoom-in"
-                        data-aos-delay="200">
-                        <div class="card shadow rounded-4 overflow-hidden border-0">
-                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="card-img-top" alt="Makanan Imun">
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
+                        style="transition: transform 0.3s ease-in-out;">
+                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
+                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
+                                style="height: 220px; object-fit: cover;">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div class="mb-3">
-                                    <span class="badge bg-success text-dark mb-2">Gaya Hidup Sehat</span>
-                                    <h5 class="card-title">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">
-                                            Tips Sederhana untuk Pola Makan Sehat
-                                        </a>
+                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
+                                    <h5 class="card-title fw-semibold text-dark">
+                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
+                                            Mengelola Stres dengan Lebih Baik</a>
                                     </h5>
-                                    <p class="card-text text-muted">Langkah mudah dan efektif untuk mengatur pola makan
-                                        agar
-                                        tetap sehat dan seimbang.</p>
+                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
+                                        meningkatkan kualitas hidup Anda.</p>
                                 </div>
-                                <div class="d-flex justify-content-between align-items-center border-top pt-3">
+                                <div
+                                    class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
                                     <div class="d-flex align-items-center">
-                                        <small class="text-muted">Dr. Budi</small>
+                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
+                                            style="width: 40px; height: 40px;">
+                                            <i class="bi bi-person text-secondary"></i>
+                                        </div>
+                                        <div>
+                                            <small class="text-muted">Psikolog Nina</small><br>
+                                            <small class="text-muted">10 Mei 2025</small>
+                                        </div>
                                     </div>
-                                    <div class="text-muted">
-                                        <i class="bi bi-heart-fill text-danger"></i> 110
-                                    </div>
+                                    <a href="#" class="btn btn-sm text-white"
+                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                                        Baca
+                                    </a>
                                 </div>
                             </div>
                         </div>

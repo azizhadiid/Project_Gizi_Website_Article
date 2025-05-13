@@ -48,12 +48,17 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{url('/beranda')}}" class="{{ request()->is('/beranda') ? 'active' : '' }}">Beranda<br></a></li>
-                    <li><a href="{{url('/about')}}" class="{{ request()->is('/about') ? 'active' : '' }}">Tentang Kami</a></li>
-                    <li><a href="{{url('/artikel')}}" class="{{ request()->is('/artikel') ? 'active' : '' }}">Artikel Gizi</a></li>
-                    <li><a href="{{url('/status')}}" class="{{ request()->is('/status') ? 'active' : '' }}">Cek Status Gizi</a></li>
-                    <li><a href="{{url('/tips')}}" class="{{ request()->is('/tips') ? 'active' : '' }}">Tips</a></li>
-                    <li><a href="p{{url('/konsul')}}" class="{{ request()->is('/konsul') ? 'active' : '' }}">Konsultasi</a></li>
+                    <li><a href="{{ url('/beranda') }}"
+                            class="{{ request()->is('beranda') ? 'active' : '' }}">Beranda</a></li>
+                    <li><a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">Tentang
+                            Kami</a></li>
+                    <li><a href="{{ url('/artikel') }}" class="{{ request()->is('artikel') ? 'active' : '' }}">Artikel
+                            Gizi</a></li>
+                    <li><a href="{{ url('/status') }}" class="{{ request()->is('status') ? 'active' : '' }}">Cek Status
+                            Gizi</a></li>
+                    <li><a href="{{ url('/tips') }}" class="{{ request()->is('tips') ? 'active' : '' }}">Tips</a></li>
+                    <li><a href="{{ url('/konsul') }}"
+                            class="{{ request()->is('konsul') ? 'active' : '' }}">Konsultasi</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>
@@ -152,6 +157,11 @@
     <!-- Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
+    {{-- CD MySwitchAlert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- MyScript --}}
+    <script src="{{ asset('assets/js/main-layout-user.js') }}"></script>
 </body>
 
 </html>

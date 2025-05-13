@@ -15,11 +15,6 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
-// Akses Landing Page 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 // Khusu User
 Route::get('/beranda', [HomeController::class, 'index']);
 Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
@@ -39,51 +34,60 @@ Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name
 Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
 Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 
+Route::get('/logout', [AuthController::class, 'logout']);
+
 
 // Khusu Auth
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-Route::post('/login', [AuthController::class, 'store']);
-Route::get('/register', [AuthController::class, 'register']);
-Route::post('/register/create', [AuthController::class, 'create']);
-Route::get('/forgot-password', function () {
-    return view('auth.forgotPassword');
-})->name('password.request');
-Route::post('/forgot-password', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
+Route::middleware(['guest'])->group(function () {
+    // Akses Landing Page 
+    Route::get('/', function () {
+        return view('welcome');
+    });
 
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::post('/login', [AuthController::class, 'store']);
+    Route::get('/register', [AuthController::class, 'register']);
+    Route::post('/register/create', [AuthController::class, 'create']);
+    Route::get('/forgot-password', function () {
+        return view('auth.forgotPassword');
+    })->name('password.request');
+    Route::post('/forgot-password', function (Request $request) {
+        $request->validate(['email' => 'required|email']);
 
-    return $status === Password::ResetLinkSent
-        ? back()->with(['status' => __($status)])
-        : back()->withErrors(['email' => __($status)]);
-})->name('password.email');
-Route::get('/reset-password/{token}', function (string $token) {
-    return view('auth.resetPassword', ['token' => $token]);
-})->name('password.reset');
-Route::post('/reset-password', function (Request $request) {
-    $request->validate([
-        'token' => 'required',
-        'email' => 'required|email',
-        'password' => 'required|min:8|confirmed',
-    ]);
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
 
-    $status = Password::reset(
-        $request->only('email', 'password', 'password_confirmation', 'token'),
-        function (User $user, string $password) {
-            $user->forceFill([
-                'password' => Hash::make($password)
-            ])->setRememberToken(Str::random(60));
+        return $status === Password::ResetLinkSent
+            ? back()->with(['status' => __($status)])
+            : back()->withErrors(['email' => __($status)]);
+    })->name('password.email');
+    Route::get('/reset-password/{token}', function (string $token) {
+        return view('auth.resetPassword', ['token' => $token]);
+    })->name('password.reset');
+    Route::post('/reset-password', function (Request $request) {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
 
-            $user->save();
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function (User $user, string $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
 
-            event(new PasswordReset($user));
-        }
-    );
+                $user->save();
 
-    return $status === Password::PasswordReset
-        ? redirect()->route('login')->with('status', __($status))
-        : back()->withErrors(['email' => [__($status)]]);
-})->name('password.update');
-Route::get('/reset-password', [AuthController::class, 'resetPassword']);
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status === Password::PasswordReset
+            ? redirect()->route('login')->with('status', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    })->name('password.update');
+    Route::get('/reset-password', [AuthController::class, 'resetPassword']);
+});

@@ -189,7 +189,7 @@
                                     </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-end">
-                                    <button class="btn btn-danger" style="font-weight: 600">Logout</button>
+                                    <a class="btn btn-danger logout" style="font-weight: 600" href="{{url('/logout')}}">Logout</a>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
