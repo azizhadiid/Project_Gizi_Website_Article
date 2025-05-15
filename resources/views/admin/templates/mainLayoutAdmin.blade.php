@@ -38,8 +38,8 @@
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
           <a class="navbar-brand brand-logo" href="index.html">
-            <img src="{{ asset('assets-admin/images/logo.svg') }}" alt="logo" class="logo-dark" />
-            <img src="{{ asset('assets-admin/images/logo-light.svg') }}" alt="logo-light" class="logo-light">
+            <img src="{{ asset('assets-admin/images/logo-light.png') }}" alt="logo" class="logo-dark" />
+            <img src="{{ asset('assets-admin/images/logo-light.png') }}" alt="logo-light" class="logo-light">
           </a>
           <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{{ asset('assets-admin/images/logo-mini.svg') }}" alt="logo" /></a>
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -52,15 +52,15 @@
             
             <li class="nav-item dropdown d-none d-xl-inline-flex user-dropdown">
               <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-xs rounded-circle ms-2" src="{{ asset('assets-admin/images/faces/face8.jpg') }}" alt="Profile image"> <span class="font-weight-normal"> Henry Klein </span></a>
+                <img class="img-xs rounded-circle ms-2" src="{{ asset('img/admin/profile/' . $profileAdmin?->profile_picture) }}" alt="Profile image"> <span class="font-weight-normal"> {{ $profileAdmin?->first_name }} {{ $profileAdmin?->last_name }} </span></a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                 <div class="dropdown-header text-center">
-                  <img class="img-md rounded-circle" src="{{ asset('assets-admin/images/faces/face8.jpg') }}" alt="Profile image">
-                  <p class="mb-1 mt-3">Henry Klein</p>
-                  <p class="font-weight-light text-muted mb-0">kleinhenry@gmail.com</p>
+                  <img class="img-xs rounded-circle ms-2 rounded-circle" src="{{ asset('img/admin/profile/' . $profileAdmin?->profile_picture) }}" alt="Profile image">
+                  <p class="mb-1 mt-3">{{ $profileAdmin?->first_name }} {{ $profileAdmin?->last_name }}</p>
+                  <p class="font-weight-light text-muted mb-0">{{ $profileAdmin?->email }}</p>
                 </div>
                 <a class="dropdown-item" href="/akun/admin"><i class="dropdown-item-icon icon-user text-primary"></i> Akun Saya </a>
-                <a class="dropdown-item"><i class="dropdown-item-icon icon-power text-primary"></i>Keluar</a>
+                <a class="dropdown-item" href="/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Keluar</a>
               </div>
             </li>
           </ul>
@@ -81,12 +81,12 @@
             <li class="nav-item nav-profile">
               <a href="#" class="nav-link">
                 <div class="profile-image">
-                  <img class="img-xs rounded-circle" src="{{ asset('assets-admin/images/faces/face8.jpg') }}" alt="profile image">
+                  <img class="img-xs rounded-circle" src="{{ asset('img/admin/profile/' . $profileAdmin?->profile_picture) }}" alt="profile image">
                   <div class="dot-indicator bg-success"></div>
                 </div>
                 <div class="text-wrapper">
-                  <p class="profile-name">Henry Klein</p>
-                  <p class="designation">Administrator</p>
+                  <p class="profile-name">{{ $profileAdmin?->first_name }} {{ $profileAdmin?->last_name }}</p>
+                  <p class="designation">{{ $profileAdmin?->position }}</p>
                 </div>
               </a>
             </li>
