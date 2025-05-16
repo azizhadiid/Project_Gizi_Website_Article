@@ -95,6 +95,19 @@ class ArtikelController extends Controller
         return view('admin.editArtikel', compact('articles'));
     }
 
+    public function search(Request $request)
+    {
+        $keyword = $request->q;
+
+        $articles = Artikel::with('adminProfile')
+            ->where('title', 'like', '%' . $keyword . '%')
+            ->orWhere('penulis', 'like', '%' . $keyword . '%')
+            ->get();
+
+        return view('admin.editArtikel', compact('articles'));
+    }
+
+
     // Tampilkan form edit
     public function edit($id)
     {

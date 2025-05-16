@@ -33,6 +33,8 @@ Route::get('/admin/artikel/edit', [ArtikelController::class, 'show'])->name('art
 Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
 Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
 Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
+
 
 Route::get('/logout', [AuthController::class, 'logout']);
 
