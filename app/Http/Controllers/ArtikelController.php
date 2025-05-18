@@ -84,16 +84,19 @@ class ArtikelController extends Controller
         return redirect()->route('artikel.create')->with('success', 'Artikel berhasil ditambahkan');
     }
 
-
-    /**
-     * Display the specified resource.
-     */
     public function show()
     {
         $articles = Artikel::with('adminProfile')->get(); // eager load relasi untuk ambil nama penulis
 
         return view('admin.editArtikel', compact('articles'));
     }
+
+    public function baca($id)
+    {
+        $artikel = Artikel::with('adminProfile')->findOrFail($id);
+        return view('detailArtikel', compact('artikel'));
+    }
+
 
     public function search(Request $request)
     {

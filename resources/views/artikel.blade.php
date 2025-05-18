@@ -75,8 +75,8 @@
                                 <small class="text-muted">{{ \Carbon\Carbon::parse($article->published_at)->translatedFormat('d M Y') }}</small>
                             </div>
                         </div>
-                        <a href="#" class="btn btn-sm text-white"
-                            style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                        <a href="{{ route('artikel.baca', $article->id) }}" class="btn btn-sm"
+                            style="background: linear-gradient(135deg, #00C9A7, #005B41); border: none; color: white; border-radius: 10px;">
                             Baca
                         </a>
                     </div>

@@ -60,7 +60,7 @@
                   <p class="font-weight-light text-muted mb-0">{{ $profileAdmin?->email }}</p>
                 </div>
                 <a class="dropdown-item" href="/akun/admin"><i class="dropdown-item-icon icon-user text-primary"></i> Akun Saya </a>
-                <a class="dropdown-item" href="/logout"><i class="dropdown-item-icon icon-power text-primary"></i>Keluar</a>
+                <a class="dropdown-item" href="{{url('/admin/logout')}}"><i class="dropdown-item-icon icon-power text-primary"></i>Keluar</a>
               </div>
             </li>
           </ul>

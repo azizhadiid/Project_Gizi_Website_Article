@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\StatusController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
@@ -22,6 +23,8 @@ Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
 Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('profile.change-password');
 Route::get('/about', [AboutController::class, 'index']);
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
+Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
+Route::get('/status', [StatusController::class, 'index'])->name('status.index');
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
@@ -37,6 +40,7 @@ Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name(
 
 
 Route::get('/logout', [AuthController::class, 'logout']);
+Route::get('/admin/logout', [AuthController::class, 'logout']);
 
 
 // Khusu Auth
