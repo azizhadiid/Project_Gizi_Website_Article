@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Artikel;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class WelcomeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -25,7 +25,7 @@ class HomeController extends Controller
         // Ambil hanya 3 artikel terbaru
         $articles = $query->latest()->take(3)->get();
 
-        return view('beranda', compact('articles'));
+        return view('welcome', compact('articles'));
     }
 
     /**

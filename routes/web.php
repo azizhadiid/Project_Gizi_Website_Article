@@ -9,6 +9,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ArtikelController;
 use App\Http\Controllers\StatusController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 use App\Models\User;
@@ -46,9 +47,8 @@ Route::get('/admin/logout', [AuthController::class, 'logout']);
 // Khusu Auth
 Route::middleware(['guest'])->group(function () {
     // Akses Landing Page 
-    Route::get('/', function () {
-        return view('welcome');
-    });
+
+    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'store']);

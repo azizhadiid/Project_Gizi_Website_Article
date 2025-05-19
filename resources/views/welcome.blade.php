@@ -52,7 +52,6 @@
                     <li><a href="{{url('/about')}}">Tentang Kami</a></li>
                     <li><a href="{{url('/artikel')}}">Artikel Gizi</a></li>
                     <li><a href="{{url('/status')}}">Cek Status Gizi</a></li>
-                    <li><a href="{{url('/tips')}}">Tips</a></li>
                     <li><a href="p{{url('/konsul')}}">Konsultasi</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
@@ -223,21 +222,22 @@
 
             <div class="container">
                 <div class="row">
+                    @foreach ($articles as $article)
 
                     <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
                         style="transition: transform 0.3s ease-in-out;">
                         <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
-                            <img src="{{ asset('assets/img/course-1.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
-                                style="height: 220px; object-fit: cover;">
+                            <img src="{{ asset('img/admin/article/' . $article->cover_image) }}" class="card-img-top"
+                                alt="Judul Artikel 2" style="height: 220px; object-fit: cover;"
+                                alt="{{ $article->title }}">
                             <div class="card-body d-flex flex-column justify-content-between">
                                 <div class="mb-3">
-                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
                                     <h5 class="card-title fw-semibold text-dark">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
-                                            Mengelola Stres dengan Lebih Baik</a>
+                                        <a href="#"
+                                            class="text-decoration-none text-dark hover-text-primary">{{ $article->title }}</a>
                                     </h5>
-                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
-                                        meningkatkan kualitas hidup Anda.</p>
+                                    <p class="card-text text-muted">
+                                        {{ \Illuminate\Support\Str::limit(strip_tags($article->content), 90) }}</p>
                                 </div>
                                 <div
                                     class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
@@ -247,94 +247,21 @@
                                             <i class="bi bi-person text-secondary"></i>
                                         </div>
                                         <div>
-                                            <small class="text-muted">Psikolog Nina</small><br>
-                                            <small class="text-muted">10 Mei 2025</small>
+                                            <small class="text-muted">{{ $article->penulis ?? 'Admin' }}</small><br>
+                                            <small
+                                                class="text-muted">{{ \Carbon\Carbon::parse($article->published_at)->translatedFormat('d M Y') }}</small>
                                         </div>
                                     </div>
-                                    <a href="#" class="btn btn-sm text-white"
-                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
+                                    <a href="{{ route('artikel.baca', $article->id) }}" class="btn btn-sm"
+                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border: none; color: white; border-radius: 10px;">
                                         Baca
                                     </a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
                     <!-- End Article Item-->
-
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
-                        style="transition: transform 0.3s ease-in-out;">
-                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
-                            <img src="{{ asset('assets/img/course-2.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
-                                style="height: 220px; object-fit: cover;">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <div class="mb-3">
-                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
-                                    <h5 class="card-title fw-semibold text-dark">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
-                                            Mengelola Stres dengan Lebih Baik</a>
-                                    </h5>
-                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
-                                        meningkatkan kualitas hidup Anda.</p>
-                                </div>
-                                <div
-                                    class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
-                                            style="width: 40px; height: 40px;">
-                                            <i class="bi bi-person text-secondary"></i>
-                                        </div>
-                                        <div>
-                                            <small class="text-muted">Psikolog Nina</small><br>
-                                            <small class="text-muted">10 Mei 2025</small>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn btn-sm text-white"
-                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
-                                        Baca
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Article Item-->
-
-                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4" data-aos="fade-up"
-                        style="transition: transform 0.3s ease-in-out;">
-                        <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
-                            <img src="{{ asset('assets/img/course-3.jpg') }}" class="card-img-top" alt="Judul Artikel 2"
-                                style="height: 220px; object-fit: cover;">
-                            <div class="card-body d-flex flex-column justify-content-between">
-                                <div class="mb-3">
-                                    <span class="badge bg-primary text-white mb-2">Kesehatan Mental</span>
-                                    <h5 class="card-title fw-semibold text-dark">
-                                        <a href="#" class="text-decoration-none text-dark hover-text-primary">Cara
-                                            Mengelola Stres dengan Lebih Baik</a>
-                                    </h5>
-                                    <p class="card-text text-muted">Pelajari cara sederhana untuk mengurangi stres dan
-                                        meningkatkan kualitas hidup Anda.</p>
-                                </div>
-                                <div
-                                    class="card-footer bg-white border-0 d-flex justify-content-between align-items-center px-0 pb-0 border-top pt-3">
-                                    <div class="d-flex align-items-center">
-                                        <div class="rounded-circle bg-light d-flex justify-content-center align-items-center me-2"
-                                            style="width: 40px; height: 40px;">
-                                            <i class="bi bi-person text-secondary"></i>
-                                        </div>
-                                        <div>
-                                            <small class="text-muted">Psikolog Nina</small><br>
-                                            <small class="text-muted">10 Mei 2025</small>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn btn-sm text-white"
-                                        style="background: linear-gradient(135deg, #00C9A7, #005B41); border-radius: 10px;">
-                                        Baca
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Article Item-->
-
                 </div>
             </div>
 
