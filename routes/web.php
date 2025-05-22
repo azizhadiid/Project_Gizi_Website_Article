@@ -8,6 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\KonsulController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Http\Request;
@@ -26,6 +27,7 @@ Route::get('/about', [AboutController::class, 'index']);
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
 Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+Route::get('/konsul', [KonsulController::class, 'index'])->name('konsul.index');
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
