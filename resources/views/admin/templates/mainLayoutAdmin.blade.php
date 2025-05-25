@@ -115,25 +115,11 @@
             
             <li class="nav-item nav-category"><span class="nav-link">Konsultasi</span></li>
             <li class="nav-item">
-              <a class="nav-link" data-bs-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+              <a class="nav-link" href="/admin/konsul">
                 <span class="menu-title">Data Konsultasi</span>
                 <i class="icon-disc menu-icon"></i>
               </a>
-              <div class="collapse" id="auth">
-                <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> 
-                    <a class="nav-link" href="konsultasi/daftar.html"> Daftar Konsultasi </a>
-                  </li>
-                  <li class="nav-item"> 
-                    <a class="nav-link" href="konsultasi/jadwal.html"> Jadwal Konsultasi </a>
-                  </li>
-                  <li class="nav-item"> 
-                    <a class="nav-link" href="konsultasi/balasan.html"> Balasan Konsultasi </a>
-                  </li>
-                </ul>
-              </div>              
             </li>
-
           </ul>
         </nav>
         <!-- partial -->
@@ -145,7 +131,7 @@
           <!-- partial:partials/_footer.html -->
           <footer class="footer">
             <div class="d-sm-flex justify-content-center justify-content-sm-between">
-              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2024 GIZIKU Semua Hak Dilindungi. <a href="#"> Terms of use</a><a href="#">Privacy Policy</a></span>
+              <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2025 GIZIKU Semua Hak Dilindungi. <a href="#"> Terms of use</a><a href="#">Privacy Policy</a></span>
               <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Dirancang oleh Tim GIZIKU <i class="icon-heart text-danger"></i></span>
             </div>
           </footer>
@@ -160,7 +146,8 @@
     <script src="{{ asset('assets-admin/vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="{{ asset('assets-admin/vendors/chart.js/chart.umd.js') }}"></script>
+    {{-- <script src="{{ asset('assets-admin/vendors/chart.js/chart.umd.js') }}"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{ asset('assets/vendors/jvectormap/jquery-jvectormap.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/jvectormap/jquery-jvectormap-world-mill-en.js') }}"></script>
     <script src="{{ asset('assets-admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>

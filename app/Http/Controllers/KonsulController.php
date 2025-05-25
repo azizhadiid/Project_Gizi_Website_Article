@@ -14,6 +14,11 @@ class KonsulController extends Controller
         return view('konsul');
     }
 
+    public function admin()
+    {
+        return view('admin.konsul');
+    }
+
     /**
      * Show the form for creating a new resource.
      */
