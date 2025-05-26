@@ -3,6 +3,10 @@
 @section('title', 'Edit Artikel')
 
 @section('konten')
+<!-- Pastikan Bootstrap CSS dan Bootstrap Icons sudah disertakan -->
+{{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 <div class="container py-5">
     <div class="card shadow-sm border-0 rounded-4">
         <div class="card-body px-4 py-5">
@@ -78,4 +82,5 @@
         </div>
     </div>
 </div>
+<div style="margin-top: 300px"></div>
 @endsection
