@@ -27,6 +27,7 @@ Route::get('/about', [AboutController::class, 'index']);
 Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
 Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+Route::post('/status/cek', [StatusController::class, 'cekStatus'])->name('status.cek');
 Route::get('/konsul', [KonsulController::class, 'index'])->name('konsul.index');
 
 // Khusu Admin

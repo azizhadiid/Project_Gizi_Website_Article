@@ -14,7 +14,7 @@
     {{-- Form Input --}}
     <div class="card border-0 shadow-sm rounded-4 mb-5" data-aos="fade-up">
         <div class="card-body p-4">
-            <form method="POST" action="">
+            <form action="{{ route('status.cek') }}" method="POST">
                 @csrf
                 <div class="row g-4">
                     <div class="col-md-6">
@@ -56,39 +56,39 @@
     </div>
 
     {{-- Tabel Hasil --}}
-    {{-- @if(isset($hasil)) --}}
+    @if(isset($data))
     <div class="card border-0 shadow-sm rounded-4" data-aos="fade-up">
         <div class="card-body p-4">
             <h5 class="fw-bold mb-3 text-success">Hasil Status Gizi</h5>
             <table class="table table-bordered table-striped">
                 <tr>
                     <th>Nama</th>
-                    <td></td>
+                    <td>{{ $data['nama'] }}</td>
                 </tr>
                 <tr>
                     <th>Umur</th>
-                    <td> bulan</td>
+                    <td>{{ $data['umur'] }} Tahun</td>
                 </tr>
                 <tr>
                     <th>Jenis Kelamin</th>
-                    <td></td>
+                    <td>{{ $data['jenis_kelamin'] == 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
                 </tr>
                 <tr>
                     <th>Berat Badan</th>
-                    <td> kg</td>
+                    <td>{{ $data['berat_badan'] }} kg</td>
                 </tr>
                 <tr>
                     <th>Tinggi Badan</th>
-                    <td> cm</td>
+                    <td>{{ $data['tinggi_badan'] }} cm</td>
                 </tr>
                 <tr>
                     <th>Status Gizi</th>
-                    <td class="fw-bold text-primary"></td>
+                    <td class="fw-bold text-primary">{{ $status_gizi }}</td>
                 </tr>
             </table>
         </div>
     </div>
-    {{-- @endif --}}
+    @endif
 
 </div>
 @endsection
