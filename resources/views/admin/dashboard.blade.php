@@ -14,15 +14,15 @@
                 <div class="d-sm-flex flex-wrap mt-3">
                     <div class="d-flex align-items-center">
                         <span class="dot-indicator bg-primary ms-2"></span>
-                        <p class="mb-0 ms-2 text-muted font-weight-semibold">Anak-anak (2098)</p>
+                        <p class="mb-0 ms-2 text-muted font-weight-semibold">Anak-anak ({{ $anak }})</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <span class="dot-indicator bg-info ms-2"></span>
-                        <p class="mb-0 ms-2 text-muted font-weight-semibold"> Remaja (1123)</p>
+                        <p class="mb-0 ms-2 text-muted font-weight-semibold"> Remaja ({{ $remaja }})</p>
                     </div>
                     <div class="d-flex align-items-center">
                         <span class="dot-indicator bg-danger ms-2"></span>
-                        <p class="mb-0 ms-2 text-muted font-weight-semibold">Dewasa (876)</p>
+                        <p class="mb-0 ms-2 text-muted font-weight-semibold">Dewasa ({{ $dewasa }})</p>
                     </div>
                 </div>
 
@@ -33,6 +33,8 @@
                 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
                 <script>
+                    const chartData = @json($chartData); // hasil dari controller
+
                     window.addEventListener('DOMContentLoaded', () => {
                         const ctx = document.getElementById('performance-indicator-chart');
                         if (ctx) {
@@ -43,37 +45,18 @@
                                         'Sep', 'Oct', 'Nov', 'Dec'
                                     ],
                                     datasets: [{
-                                            label: 'Red',
-                                            data: [30, 25, 50, 25, 50, 25, 50, 55, 20, 35, 25, 30],
-                                            backgroundColor: '#ff5c7c',
-                                            stack: 'combined',
-                                            barThickness: 12, // Lebar batang lebih ramping
-                                            borderRadius: 6 // Ujung batang membulat
-                                        },
-                                        {
-                                            label: 'Purple',
-                                            data: [40, 45, 10, 35, 30, 15, 20, 20, 30, 25, 15, 15],
-                                            backgroundColor: '#8349ff',
-                                            stack: 'combined',
-                                            barThickness: 12,
-                                            borderRadius: 6
-                                        },
-                                        {
-                                            label: 'Cyan',
-                                            data: [30, 30, 40, 40, 20, 60, 30, 25, 50, 40, 60, 55],
-                                            backgroundColor: '#42d8e8',
-                                            stack: 'combined',
-                                            barThickness: 12,
-                                            borderRadius: 6
-                                        }
-                                    ]
+                                        label: 'Jumlah Konsultasi',
+                                        data: chartData,
+                                        backgroundColor: '#42d8e8',
+                                        barThickness: 12,
+                                        borderRadius: 6
+                                    }]
                                 },
                                 options: {
                                     responsive: true,
                                     maintainAspectRatio: false,
                                     scales: {
                                         x: {
-                                            stacked: true,
                                             grid: {
                                                 display: false
                                             },
@@ -82,14 +65,10 @@
                                                     size: 14,
                                                     weight: '500'
                                                 }
-                                            },
-                                            categoryPercentage: 0.6, // mengatur jarak antar kategori
-                                            barPercentage: 0.9 // mengatur ukuran batang dalam kategori
+                                            }
                                         },
                                         y: {
-                                            stacked: true,
                                             beginAtZero: true,
-                                            max: 100,
                                             grid: {
                                                 color: '#e0e0e0',
                                                 borderDash: [4, 4]
@@ -120,29 +99,73 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="card-title">Pendaftar Konsultasi Hari Ini</h4>
-                <div class="aligner-wrapper py-3">
-                    <div class="doughnut-chart-height">
-                        <canvas id="sessionsDoughnutChart" height="210"></canvas>
-                    </div>
-                    <div class="wrapper d-flex flex-column justify-content-center absolute absolute-center">
-                        <h2 class="text-center mb-0 font-weight-bold">8.234</h2>
-                        <small class="d-block text-center text-muted  font-weight-semibold mb-0">Total Leads</small>
-                    </div>
-                </div>
-                <div class="wrapper mt-4 d-flex flex-wrap align-items-cente">
-                    <div class="d-flex">
-                        <span class="square-indicator bg-danger ms-2"></span>
-                        <p class="mb-0 ms-2">Anak-anak</p>
-                    </div>
-                    <div class="d-flex">
-                        <span class="square-indicator bg-success ms-2"></span>
-                        <p class="mb-0 ms-2">Remaja</p>
-                    </div>
-                    <div class="d-flex">
-                        <span class="square-indicator bg-warning ms-2"></span>
-                        <p class="mb-0 ms-2">Dewasa</p>
+                <!-- CDN Chart.js -->
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <!-- Donut Chart Canvas -->
+                <div class="doughnut-chart-height position-relative" style="height: 210px; margin-top: 40px;">
+                    <canvas id="sessionsDoughnutChart"></canvas>
+                    <!-- Text in the middle -->
+                    <div class="position-absolute top-50 start-50 translate-middle text-center">
+                        <h2 class="mb-0 fw-bold">{{ number_format($totalHariIni) }}</h2>
+                        <small class="text-muted fw-semibold">Total Konsulatsi</small>
                     </div>
                 </div>
+
+                <!-- Donut Chart Script -->
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        const ctx = document.getElementById('sessionsDoughnutChart');
+
+                        if (ctx) {
+                            new Chart(ctx, {
+                                type: 'doughnut',
+                                data: {
+                                    labels: ['Anak-anak', 'Remaja', 'Dewasa'],
+                                    datasets: [{
+                                        data: [{{ $anak }}, {{ $remaja }}, {{ $dewasa }}],
+                                        backgroundColor: ['#ec4e62', '#6dd230', '#fdd762'],
+                                        borderWidth: 0,
+                                        hoverOffset: 6
+                                    }]
+                                },
+                                options: {
+                                    cutout: '70%', // membuat donat lebar
+                                    responsive: true,
+                                    maintainAspectRatio: false,
+                                    plugins: {
+                                        legend: {
+                                            display: false // kita buat legenda custom di bawah
+                                        },
+                                        tooltip: {
+                                            callbacks: {
+                                                label: function (context) {
+                                                    return `${context.label}: ${context.parsed} orang`;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            });
+                        }
+                    });
+                </script>
+
+                <!-- Custom Legend -->
+                <div class="mt-4 d-flex justify-content-center gap-4 flex-wrap">
+                    <div class="d-flex align-items-center">
+                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #ec4e62;"></span>
+                        <span class="text-muted fw-semibold">Anak-anak</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #6dd230;"></span>
+                        <span class="text-muted fw-semibold">Remaja</span>
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #fdd762;"></span>
+                        <span class="text-muted fw-semibold">Dewasa</span>
+                    </div>
+                </div>  
             </div>
         </div>
     </div>
@@ -158,18 +181,20 @@
             </div>
             <div class="d-md-flex row m-0 quick-action-btns" role="group" aria-label="Quick action buttons">
                 <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                    <button type="button" class="btn px-0"> <i class="icon-docs me-2"></i>Menambahkan Artikel</button>
+                    <a href="/admin/artikel/tambah" class="btn px-0"> <i class="icon-docs me-2"></i>Menambahkan
+                        Artikel</a>
                 </div>
                 <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                    <button type="button" class="btn px-0"><i class="icon-docs me-2"></i> Riview Artikel Gizi</button>
+                    <a href="/admin/artikel/edit" class="btn px-0"><i class="icon-docs me-2"></i> Riview Artikel
+                        Gizi</a>
                 </div>
                 <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                    <button type="button" class="btn px-0"><i class="icon-folder me-2"></i> Manajemen
-                        Konsultasi</button>
+                    <a href="/admin/konsul" class="btn px-0"><i class="icon-folder me-2"></i> Manajemen
+                        Konsultasi</a>
                 </div>
                 <div class="col-sm-6 col-md-3 p-3 text-center btn-wrapper">
-                    <button type="button" class="btn px-0"><i class="icon-book-open me-2"></i>Verifikasi
-                        Konsulatsi</button>
+                    <a href="/admin/konsul" class="btn px-0"><i class="icon-book-open me-2"></i>Verifikasi
+                        Konsulatsi</a>
                 </div>
             </div>
         </div>
@@ -259,7 +284,7 @@
             <div class="card-body">
                 <div class="d-sm-flex align-items-center mb-4">
                     <h4 class="card-title mb-sm-0 text-primary">Data Konsultasi</h4>
-                    <a href="#" class="text-muted ms-auto mb-3 mb-sm-0">Lihat Semua</a>
+                    <a href="/admin/konsul" class="text-muted ms-auto mb-3 mb-sm-0">Lihat Semua</a>
                 </div>
 
                 <div class="table-responsive border rounded p-2">

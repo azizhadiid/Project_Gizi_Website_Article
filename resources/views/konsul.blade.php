@@ -4,6 +4,33 @@
 
 @section('konten')
 <div class="container py-5">
+    @if ($errors->any())
+    <div class="alert alert-danger mt-3 alert-dismissible fade show" role="alert" style="width: 100%">
+        <div class="d-flex align-items-center">
+            <i class="bi bi-exclamation-circle-fill me-2"></i>
+            <div>
+                @foreach ($errors->all() as $error)
+                <p class="m-0">{{ $error }}</p>
+                @endforeach
+            </div>
+        </div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    {{-- Jika Sukses Login --}}
+    @if (session('success'))
+    <div class="alert alert-success" style="width: 100%">
+        {{ session('success') }}
+    </div>
+    @endif
+
+    {{-- jika Password telah di ubah --}}
+    @if (session('status'))
+    <div class="alert alert-success" style="width: 100%">
+        {{ session('status') }}
+    </div>
+    @endif
 
     {{-- Judul Halaman --}}
     <div class="text-center mb-5" data-aos="fade-down">
@@ -14,36 +41,54 @@
     {{-- Form Input --}}
     <div class="card border-0 shadow-sm rounded-4 mb-5" data-aos="fade-up">
         <div class="card-body p-4">
-            <form method="POST" action="">
+            <form action="{{ route('konsultasi.store') }}" method="POST">
                 @csrf
                 <div class="row g-4">
                     <div class="col-md-6">
                         <label for="nama" class="form-label">Nama Lengkap</label>
                         <input type="text" id="nama" class="form-control form-control-lg rounded-3"
-                            placeholder="Nama lengkap Anda" required>
+                            placeholder="Nama lengkap Anda" required name="full_name">
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">Email</label>
                         <input type="email" id="email" class="form-control form-control-lg rounded-3"
-                            placeholder="email@example.com" required>
+                            placeholder="email@example.com" required name="email">
                     </div>
+
+                    <div class="col-md-6">
+                        <label for="umur" class="form-label">Umur</label>
+                        <input type="number" id="umur" class="form-control form-control-lg rounded-3"
+                            placeholder="12" required name="umur">
+                    </div>
+
                     <div class="col-md-6">
                         <label for="jenis" class="form-label">Jenis Konsultasi</label>
-                        <select id="jenis" class="form-select form-select-lg rounded-3" required>
-                            <option selected disabled>Pilih jenis konsultasi</option>
-                            <option value="gizi">Konsultasi Gizi</option>
-                            <option value="kesehatan">Konsultasi Kesehatan</option>
-                            <option value="psikologi">Konsultasi Psikologi</option>
+                        <select name="jenis_konsultasi" id="jenis"
+                            class="form-select form-select-lg rounded-3 @error('jenis_konsultasi') is-invalid @enderror"
+                            required>
+                            <option disabled selected>Pilih jenis konsultasi</option>
+                            <option value="gizi" {{ old('jenis_konsultasi') == 'gizi' ? 'selected' : '' }}>Konsultasi
+                                Gizi</option>
+                            <option value="kesehatan" {{ old('jenis_konsultasi') == 'kesehatan' ? 'selected' : '' }}>
+                                Konsultasi Kesehatan</option>
+                            <option value="psikologi" {{ old('jenis_konsultasi') == 'psikologi' ? 'selected' : '' }}>
+                                Konsultasi Psikologi</option>
                         </select>
+
+                        @error('jenis_konsultasi')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
+
                     <div class="col-md-6">
                         <label for="tanggal" class="form-label">Tanggal Konsultasi</label>
-                        <input type="date" id="tanggal" class="form-control form-control-lg rounded-3" required>
+                        <input type="date" id="tanggal" class="form-control form-control-lg rounded-3" required
+                            name="tanggal_konsultasi">
                     </div>
                     <div class="col-12">
                         <label for="pesan" class="form-label">Pesan / Keluhan</label>
                         <textarea id="pesan" class="form-control form-control-lg rounded-3" rows="4"
-                            placeholder="Tulis pesan atau keluhan Anda..." required></textarea>
+                            placeholder="Tulis pesan atau keluhan Anda..." required name="keluhan"></textarea>
                     </div>
                 </div>
 
@@ -73,22 +118,29 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Amanda Putri</td>
-                            <td>Konsultasi Gizi</td>
-                            <td>2025-05-20</td>
-                            <td><span class="badge bg-success">Selesai</span></td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Budi Santoso</td>
-                            <td>Konsultasi Kesehatan</td>
-                            <td>2025-05-21</td>
-                            <td><span class="badge bg-warning text-dark">Menunggu</span></td>
-                        </tr>
-                    </tbody>
+                    @forelse ($konsultasi as $konsul)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $konsul->full_name }}</td>
+                        <td>{{ ucfirst($konsul->jenis_konsultasi) }}</td>
+                        <td>{{ \Carbon\Carbon::parse($konsul->tanggal_konsultasi)->format('Y-m-d') }}</td>
+                        <td>
+                            @if ($konsul->status == 'selesai')
+                            <span class="badge bg-success">Selesai</span>
+                            @elseif ($konsul->status == 'menunggu')
+                            <span class="badge bg-warning text-dark">Menunggu</span>
+                            @elseif ($konsul->status == 'diproses')
+                            <span class="badge bg-primary">Diproses</span>
+                            @else
+                            <span class="badge bg-secondary">{{ ucfirst($konsul->status) }}</span>
+                            @endif
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="5" class="text-center">Belum ada data konsultasi.</td>
+                    </tr>
+                    @endforelse
                 </table>
             </div>
 

@@ -153,7 +153,7 @@
     <script src="{{ asset('assets-admin/vendors/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
     <script src="{{ asset('assets-admin/vendors/moment/moment.min.js') }}"></script>
     <script src="{{ asset('assets-admin/vendors/daterangepicker/daterangepicker.js') }}"></script>
-    <script src="{{ asset('assets-admin/vendors/chartist/chartist.min.js') }}"></script>
+    {{-- <script src="{{ asset('assets-admin/vendors/chartist/chartist.min.js') }}"></script> --}}
     <script src="{{ asset('assets-admin/vendors/progressbar.js/progressbar.min.js') }}"></script>
     <script src="{{ asset('assets-admin/js/jquery.cookie.js') }}"></script>
     <!-- End plugin js for this page -->

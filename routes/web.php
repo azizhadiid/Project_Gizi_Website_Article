@@ -29,6 +29,7 @@ Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('arti
 Route::get('/status', [StatusController::class, 'index'])->name('status.index');
 Route::post('/status/cek', [StatusController::class, 'cekStatus'])->name('status.cek');
 Route::get('/konsul', [KonsulController::class, 'index'])->name('konsul.index');
+Route::post('/konsul', [KonsulController::class, 'store'])->name('konsultasi.store');
 
 // Khusu Admin
 Route::get('/dashboard', [AdminController::class, 'index']);
@@ -41,7 +42,7 @@ Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name
 Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
 Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
 Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
-Route::get('/admin/konsul', [KonsulController::class, 'admin'])->name('konsul.index');
+Route::get('/admin/konsul', [KonsulController::class, 'admin'])->name('adminKonsul.index');
 
 
 Route::get('/logout', [AuthController::class, 'logout']);

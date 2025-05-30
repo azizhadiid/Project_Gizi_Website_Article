@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Konsultasi;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class KonsulController extends Controller
 {
@@ -11,7 +13,10 @@ class KonsulController extends Controller
      */
     public function index()
     {
-        return view('konsul');
+        $user = Auth::user();
+        $konsultasi = $user->konsul;
+
+        return view('konsul', compact('user', 'konsultasi'));
     }
 
     public function admin()
@@ -32,7 +37,27 @@ class KonsulController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'jenis_konsultasi' => 'required|string',
+            'tanggal_konsultasi' => 'required|date',
+            'umur' => 'required|string',
+            'keluhan' => 'nullable|string',
+        ]);
+
+        Konsultasi::create([
+            'user_id' => Auth::id(), // ambil ID user yang sedang login
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'jenis_konsultasi' => $request->jenis_konsultasi,
+            'tanggal_konsultasi' => $request->tanggal_konsultasi,
+            'umur' => $request->umur,
+            'keluhan' => $request->keluhan,
+            'status' => 'menunggu', // default value secara eksplisit
+        ]);
+
+        return redirect()->route('konsul.index')->with('success', 'Data konsultasi berhasil dikirim.');
     }
 
     /**

@@ -42,4 +42,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(UserProfile::class);
     }
+
+    public function konsul()
+    {
+        return $this->hasMany(Konsultasi::class);
+    }
 }
