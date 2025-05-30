@@ -19,30 +19,36 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 // Khusu User
-Route::get('/beranda', [HomeController::class, 'index']);
-Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
-Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
-Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('profile.change-password');
-Route::get('/about', [AboutController::class, 'index']);
-Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
-Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
-Route::get('/status', [StatusController::class, 'index'])->name('status.index');
-Route::post('/status/cek', [StatusController::class, 'cekStatus'])->name('status.cek');
-Route::get('/konsul', [KonsulController::class, 'index'])->name('konsul.index');
-Route::post('/konsul', [KonsulController::class, 'store'])->name('konsultasi.store');
+Route::middleware(['auth', 'role:user'])->group(function () {
+    Route::get('/beranda', [HomeController::class, 'index']);
+    Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
+    Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
+    Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('profile.change-password');
+    Route::get('/about', [AboutController::class, 'index']);
+    Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
+    Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
+    Route::get('/status', [StatusController::class, 'index'])->name('status.index');
+    Route::post('/status/cek', [StatusController::class, 'cekStatus'])->name('status.cek');
+    Route::get('/konsul', [KonsulController::class, 'index'])->name('konsul.index');
+    Route::post('/konsul', [KonsulController::class, 'store'])->name('konsultasi.store');
+});
+
 
 // Khusu Admin
-Route::get('/dashboard', [AdminController::class, 'index']);
-Route::get('/akun/admin', [AdminProfileController::class, 'index'])->name('admin.profile.show');
-Route::post('/admin/admin', [AdminProfileController::class, 'update'])->name('admin.profile.update');
-Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('artikel.create');
-Route::post('/admin/artikel/simpan', [ArtikelController::class, 'store'])->name('artikel.store');
-Route::get('/admin/artikel/edit', [ArtikelController::class, 'show'])->name('artikel.index');
-Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
-Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
-Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
-Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
-Route::get('/admin/konsul', [KonsulController::class, 'admin'])->name('adminKonsul.index');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index']);
+    Route::get('/akun/admin', [AdminProfileController::class, 'index'])->name('admin.profile.show');
+    Route::post('/admin/admin', [AdminProfileController::class, 'update'])->name('admin.profile.update');
+    Route::get('/admin/artikel/tambah', [ArtikelController::class, 'create'])->name('artikel.create');
+    Route::post('/admin/artikel/simpan', [ArtikelController::class, 'store'])->name('artikel.store');
+    Route::get('/admin/artikel/edit', [ArtikelController::class, 'show'])->name('artikel.index');
+    Route::get('/admin/artikel/{id}/edit', [ArtikelController::class, 'edit'])->name('artikel.edit');
+    Route::put('/admin/artikel/{id}', [ArtikelController::class, 'updateArtikel'])->name('artikel.update');
+    Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
+    Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
+    Route::get('/admin/konsul', [KonsulController::class, 'admin'])->name('adminKonsul.index');
+});
+
 
 
 Route::get('/logout', [AuthController::class, 'logout']);
