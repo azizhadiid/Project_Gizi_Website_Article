@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\StatusGizi;
 use Illuminate\Http\Request;
 
 class StatusController extends Controller
@@ -42,6 +43,16 @@ class StatusController extends Controller
         } else {
             $status = 'Obesitas';
         }
+
+        // Simpan ke database
+        StatusGizi::create([
+            'nama' => $validated['nama'],
+            'umur' => $validated['umur'],
+            'jenis_kelamin' => $validated['jenis_kelamin'],
+            'berat_badan' => $validated['berat_badan'],
+            'tinggi_badan' => $validated['tinggi_badan'],
+            'status_gizi' => $status,
+        ]);
 
         return view('status', [
             'data' => $validated,

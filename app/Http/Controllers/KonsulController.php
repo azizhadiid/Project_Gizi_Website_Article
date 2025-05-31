@@ -21,7 +21,8 @@ class KonsulController extends Controller
 
     public function admin()
     {
-        return view('admin.konsul');
+        $konsultasis = Konsultasi::latest()->take(10)->get(); // ambil 10 data terbaru
+        return view('admin.konsul', compact('konsultasis'));
     }
 
     /**

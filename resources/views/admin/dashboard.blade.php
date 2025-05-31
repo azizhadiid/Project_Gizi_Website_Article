@@ -123,7 +123,19 @@
                                 data: {
                                     labels: ['Anak-anak', 'Remaja', 'Dewasa'],
                                     datasets: [{
-                                        data: [{{ $anak }}, {{ $remaja }}, {{ $dewasa }}],
+                                        data: [{
+                                            {
+                                                $anak
+                                            }
+                                        }, {
+                                            {
+                                                $remaja
+                                            }
+                                        }, {
+                                            {
+                                                $dewasa
+                                            }
+                                        }],
                                         backgroundColor: ['#ec4e62', '#6dd230', '#fdd762'],
                                         borderWidth: 0,
                                         hoverOffset: 6
@@ -149,23 +161,27 @@
                             });
                         }
                     });
+
                 </script>
 
                 <!-- Custom Legend -->
                 <div class="mt-4 d-flex justify-content-center gap-4 flex-wrap">
                     <div class="d-flex align-items-center">
-                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #ec4e62;"></span>
+                        <span class="square-indicator me-2"
+                            style="width: 12px; height: 12px; background-color: #ec4e62;"></span>
                         <span class="text-muted fw-semibold">Anak-anak</span>
                     </div>
                     <div class="d-flex align-items-center">
-                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #6dd230;"></span>
+                        <span class="square-indicator me-2"
+                            style="width: 12px; height: 12px; background-color: #6dd230;"></span>
                         <span class="text-muted fw-semibold">Remaja</span>
                     </div>
                     <div class="d-flex align-items-center">
-                        <span class="square-indicator me-2" style="width: 12px; height: 12px; background-color: #fdd762;"></span>
+                        <span class="square-indicator me-2"
+                            style="width: 12px; height: 12px; background-color: #fdd762;"></span>
                         <span class="text-muted fw-semibold">Dewasa</span>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>
@@ -224,8 +240,8 @@
                         <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded-4 shadow-sm">
                             <div>
                                 <span class="text-muted">Total Anak Terdata</span>
-                                <h4 class="fw-bold">1,234</h4>
-                                <span class="text-success">+12 Hari Ini</span>
+                                <h4 class="fw-bold">{{ number_format($totalAnak) }}</h4>
+                                <span class="text-success">+{{ rand(1, 20) }} Hari Ini</span>
                             </div>
                             <div class="bg-primary text-white p-3 rounded-circle">
                                 <i class="icon-people"></i>
@@ -237,7 +253,7 @@
                         <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded-4 shadow-sm">
                             <div>
                                 <span class="text-muted">Anak Gizi Buruk</span>
-                                <h4 class="fw-bold text-danger">58</h4>
+                                <h4 class="fw-bold text-danger">{{ $giziBuruk }}</h4>
                                 <span class="text-muted">Perlu perhatian</span>
                             </div>
                             <div class="bg-danger text-white p-3 rounded-circle">
@@ -250,7 +266,7 @@
                         <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded-4 shadow-sm">
                             <div>
                                 <span class="text-muted">Anak Gizi Normal</span>
-                                <h4 class="fw-bold text-success">1,050</h4>
+                                <h4 class="fw-bold text-success">{{ $giziNormal }}</h4>
                                 <span class="text-muted">Data stabil</span>
                             </div>
                             <div class="bg-success text-white p-3 rounded-circle">
@@ -263,7 +279,7 @@
                         <div class="d-flex justify-content-between align-items-center bg-light p-3 rounded-4 shadow-sm">
                             <div>
                                 <span class="text-muted">Data Belum Lengkap</span>
-                                <h4 class="fw-bold text-warning">126</h4>
+                                <h4 class="fw-bold text-warning">{{ $jumlahBelumLengkap }}</h4>
                                 <span class="text-muted">Perlu verifikasi</span>
                             </div>
                             <div class="bg-warning text-white p-3 rounded-circle">
@@ -299,59 +315,39 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($konsultasis as $konsul)
                             <tr>
                                 <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face1.jpg"
-                                        alt="profile image">
-                                    Ibu Siti
+                                    <img class="img-sm rounded-circle me-2"
+                                        src="{{ asset('assets/images/faces/face1.jpg') }}" alt="profile image">
+                                    {{ $konsul->full_name }}
                                 </td>
-                                <td>Masalah Nafsu Makan</td>
-                                <td>24 Mei 2025</td>
-                                <td><span class="badge bg-warning text-dark p-2 rounded-3">Menunggu</span></td>
+                                <td>{{ $konsul->jenis_konsultasi }}</td>
+                                <td>{{ \Carbon\Carbon::parse($konsul->tanggal_konsultasi)->translatedFormat('d F Y') }}
+                                </td>
                                 <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Lihat</a>
+                                    @if($konsul->status == 'menunggu')
+                                    <span class="badge bg-warning text-dark p-2 rounded-3">Menunggu</span>
+                                    @elseif($konsul->status == 'dijawab')
+                                    <span class="badge bg-success p-2 rounded-3">Dijawab</span>
+                                    @elseif($konsul->status == 'ditolak')
+                                    <span class="badge bg-danger p-2 rounded-3">Ditolak</span>
+                                    @else
+                                    <span class="badge bg-secondary p-2 rounded-3">Tidak Diketahui</span>
+                                    @endif
+                                </td>
+                                <td>
+                                    <a href=""
+                                        class="btn btn-sm btn-outline-primary">Lihat</a>
                                 </td>
                             </tr>
+                            @empty
                             <tr>
-                                <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face2.jpg"
-                                        alt="profile image">
-                                    Pak Budi
-                                </td>
-                                <td>Stunting & Pertumbuhan</td>
-                                <td>23 Mei 2025</td>
-                                <td><span class="badge bg-success p-2 rounded-3">Dijawab</span></td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Lihat</a>
-                                </td>
+                                <td colspan="5" class="text-center">Tidak ada data konsultasi.</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face3.jpg"
-                                        alt="profile image">
-                                    Ibu Lina
-                                </td>
-                                <td>Menu MPASI Sehat</td>
-                                <td>22 Mei 2025</td>
-                                <td><span class="badge bg-danger p-2 rounded-3">Ditolak</span></td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-outline-secondary">Detail</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face4.jpg"
-                                        alt="profile image">
-                                    Ibu Nani
-                                </td>
-                                <td>Cek Gizi Anak</td>
-                                <td>21 Mei 2025</td>
-                                <td><span class="badge bg-success p-2 rounded-3">Dijawab</span></td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-outline-primary">Lihat</a>
-                                </td>
-                            </tr>
+                            @endforelse
                         </tbody>
+
                     </table>
                 </div>
 

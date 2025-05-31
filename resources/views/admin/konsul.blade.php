@@ -16,7 +16,7 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Nama Orang Tua</th>
+                                <th>Nama</th>
                                 <th>Topik</th>
                                 <th>Tanggal</th>
                                 <th>Status</th>
@@ -24,39 +24,37 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @forelse($konsultasis as $konsul)
                             <tr>
                                 <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face1.jpg"
-                                        alt="profile image">
-                                    Ibu Siti
+                                    <img class="img-sm rounded-circle me-2"
+                                        src="{{ asset('assets/images/faces/face1.jpg') }}" alt="profile image">
+                                    {{ $konsul->full_name }}
                                 </td>
-                                <td>Gizi Anak Kurus</td>
-                                <td>25 Mei 2025</td>
-                                <td><span class="badge bg-warning text-dark p-2 rounded-3">Menunggu</span></td>
-                                <td><a href="#" class="btn btn-sm btn-outline-info">Detail</a></td>
-                            </tr>
-                            <tr>
+                                <td>{{ $konsul->jenis_konsultasi }}</td>
+                                <td>{{ \Carbon\Carbon::parse($konsul->tanggal_konsultasi)->translatedFormat('d F Y') }}
+                                </td>
                                 <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face2.jpg"
-                                        alt="profile image">
-                                    Pak Ahmad
+                                    @if($konsul->status == 'menunggu')
+                                    <span class="badge bg-warning text-dark p-2 rounded-3">Menunggu</span>
+                                    @elseif($konsul->status == 'dijawab')
+                                    <span class="badge bg-success p-2 rounded-3">Dijawab</span>
+                                    @elseif($konsul->status == 'ditolak')
+                                    <span class="badge bg-danger p-2 rounded-3">Ditolak</span>
+                                    @else
+                                    <span class="badge bg-secondary p-2 rounded-3">Tidak Diketahui</span>
+                                    @endif
                                 </td>
-                                <td>MPASI untuk Bayi 6 Bulan</td>
-                                <td>24 Mei 2025</td>
-                                <td><span class="badge bg-success p-2 rounded-3">Dijawab</span></td>
-                                <td><a href="#" class="btn btn-sm btn-outline-info">Detail</a></td>
-                            </tr>
-                            <tr>
                                 <td>
-                                    <img class="img-sm rounded-circle me-2" src="assets/images/faces/face3.jpg"
-                                        alt="profile image">
-                                    Ibu Dewi
+                                    <a href=""
+                                        class="btn btn-sm btn-outline-primary">Lihat</a>
                                 </td>
-                                <td>Stunting & Gizi Buruk</td>
-                                <td>22 Mei 2025</td>
-                                <td><span class="badge bg-danger p-2 rounded-3">Ditolak</span></td>
-                                <td><a href="#" class="btn btn-sm btn-outline-secondary">Lihat Alasan</a></td>
                             </tr>
+                            @empty
+                            <tr>
+                                <td colspan="5" class="text-center">Tidak ada data konsultasi.</td>
+                            </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Konsultasi;
+use App\Models\StatusGizi;
+use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +16,19 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $konsultasis = Konsultasi::latest()->take(10)->get(); // ambil 10 data terbaru
+
+        $jumlahBelumLengkap = UserProfile::where(function ($query) {
+            $query->whereNull('first_name')
+                ->orWhere('first_name', '')
+                ->orWhereNull('last_name')
+                ->orWhere('last_name', '');
+        })->count();
+
+        $totalAnak = StatusGizi::count();
+        $giziBuruk = StatusGizi::where('status_gizi', 'buruk')->count();
+        $giziNormal = StatusGizi::where('status_gizi', 'normal')->count();
+        $belumLengkap = StatusGizi::whereNull('status_gizi')->orWhere('status_gizi', '')->count();
         $today = Carbon::today();
 
         $konsulHariIni = DB::table('konsul')
@@ -37,7 +53,7 @@ class AdminController extends Controller
             $chartData[] = $monthlyCounts[$i] ?? 0;
         }
 
-        return view('admin.dashboard', compact('chartData', 'anak', 'remaja', 'dewasa', 'totalHariIni'));
+        return view('admin.dashboard', compact('chartData', 'anak', 'remaja', 'dewasa', 'totalHariIni', 'totalAnak', 'giziBuruk', 'giziNormal', 'belumLengkap', 'jumlahBelumLengkap', 'konsultasis'));
     }
 
     /**
