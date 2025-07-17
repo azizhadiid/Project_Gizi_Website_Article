@@ -47,6 +47,7 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::delete('/admin/artikel/{id}', [ArtikelController::class, 'destroy'])->name('artikel.destroy');
     Route::get('/admin/artikel/search', [ArtikelController::class, 'search'])->name('artikel.search');
     Route::get('/admin/konsul', [KonsulController::class, 'admin'])->name('adminKonsul.index');
+    Route::put('/admin/konsul/{id}/update-status', [KonsulController::class, 'updateStatus'])->name('adminKonsul.updateStatus');
 });
 
 

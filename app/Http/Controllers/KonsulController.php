@@ -21,8 +21,32 @@ class KonsulController extends Controller
 
     public function admin()
     {
-        $konsultasis = Konsultasi::latest()->take(10)->get(); // ambil 10 data terbaru
+        $konsultasis = Konsultasi::with(['user'])
+            ->latest()
+            ->take(10)
+            ->get();
+
         return view('admin.konsul', compact('konsultasis'));
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:menunggu,disetujui,batal,selesai'
+        ]);
+
+        try {
+            $konsultasi = Konsultasi::findOrFail($id);
+            $konsultasi->update([
+                'status' => $request->status
+            ]);
+
+            return redirect()->route('adminKonsul.index')
+                ->with('success', 'Status konsultasi berhasil diperbarui');
+        } catch (\Exception $e) {
+            return redirect()->route('adminKonsul.index')
+                ->with('error', 'Gagal memperbarui status konsultasi');
+        }
     }
 
     /**
