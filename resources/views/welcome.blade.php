@@ -30,9 +30,7 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <!-- My Style -->
-    <style>
-
-    </style>
+   <link href="{{ asset('assets/css/welcome.css') }}" rel="stylesheet">
 </head>
 
 <body class="index-page">
@@ -63,6 +61,50 @@
     </header>
 
     <main class="main">
+        <div class="row" style="width: 50%">
+            @if ($errors->any())
+            <div class="col-12">
+                <div class="alert alert-danger alert-dismissible fade show py-2" role="alert">
+                    <div class="d-flex align-items-start">
+                        <i class="bi bi-exclamation-circle-fill me-2 mt-1 flex-shrink-0" style="font-size: 0.9rem;"></i>
+                        <div class="flex-grow-1">
+                            @foreach ($errors->all() as $error)
+                            <small class="d-block mb-1 lh-sm">{{ $error }}</small>
+                            @endforeach
+                        </div>
+                    </div>
+                    <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+
+            @if (session('success'))
+            <div class="col-12">
+                <div class="alert alert-success alert-dismissible fade show py-2" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2 flex-shrink-0" style="font-size: 0.9rem;"></i>
+                        <small class="mb-0 flex-grow-1">{{ session('success') }}</small>
+                    </div>
+                    <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+
+            @if (session('status'))
+            <div class="col-12">
+                <div class="alert alert-info alert-dismissible fade show py-2" role="alert">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-info-circle-fill me-2 flex-shrink-0" style="font-size: 0.9rem;"></i>
+                        <small class="mb-0 flex-grow-1">{{ session('status') }}</small>
+                    </div>
+                    <button type="button" class="btn-close btn-close-sm" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                </div>
+            </div>
+            @endif
+        </div>
 
         <!-- Hero Section -->
         <section id="hero" class="hero section dark-background">
@@ -312,17 +354,82 @@
                     </ul>
                 </div>
 
-                <div class="col-lg-4 col-md-12 footer-newsletter">
-                    <h4>Newsletter Kami</h4>
-                    <p>Berlangganan untuk mendapatkan tips gizi dan informasi kesehatan terbaru.</p>
-                    <form action="forms/newsletter.php" method="post" class="php-email-form">
-                        <div class="newsletter-form">
-                            <input type="email" name="email">
-                            <input type="submit" value="Berlangganan">
+                <div class="col-lg-4 col-md-12 footer-contact-form">
+                    <h4>Hubungi Kami</h4>
+                    <p>Ada pertanyaan? Kirimkan pesan kepada kami dan dapatkan tips gizi terbaru!</p>
+
+                    <form action="{{ route('kontak.kirim') }}" method="post">
+                        @csrf
+                        <div class="row gy-3">
+                            <!-- Nama Field -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="text" name="name" class="form-control" id="floatingName"
+                                        placeholder="Nama Lengkap" required>
+                                    <label for="floatingName">
+                                        <i class="bi bi-person me-1"></i>Nama Lengkap
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Email Field -->
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <input type="email" name="email" class="form-control" id="floatingEmail"
+                                        placeholder="Email" required>
+                                    <label for="floatingEmail">
+                                        <i class="bi bi-envelope me-1"></i>Email
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Subject Field -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <select name="subject" class="form-select" id="floatingSubject" required>
+                                        <option value="">Pilih Topik</option>
+                                        <option value="konsultasi"
+                                            {{ old('subject') == 'konsultasi' ? 'selected' : '' }}>
+                                            Konsultasi Gizi
+                                        </option>
+                                        <option value="tips" {{ old('subject') == 'tips' ? 'selected' : '' }}>
+                                            Tips Kesehatan
+                                        </option>
+                                        <option value="artikel" {{ old('subject') == 'artikel' ? 'selected' : '' }}>
+                                            Request Artikel
+                                        </option>
+                                        <option value="newsletter"
+                                            {{ old('subject') == 'newsletter' ? 'selected' : '' }}>
+                                            Berlangganan Newsletter
+                                        </option>
+                                        <option value="lainnya" {{ old('subject') == 'lainnya' ? 'selected' : '' }}>
+                                            Lainnya
+                                        </option>
+                                    </select>
+                                    <label for="floatingSubject">
+                                        <i class="bi bi-chat-dots me-1"></i>Topik Pesan
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Message Field -->
+                            <div class="col-12">
+                                <div class="form-floating">
+                                    <textarea name="message" class="form-control" placeholder="Tulis pesan Anda disini"
+                                        id="floatingMessage" style="height: 120px" required></textarea>
+                                    <label for="floatingMessage">
+                                        <i class="bi bi-pencil-square me-1"></i>Pesan Anda
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-primary w-100 py-2">
+                                    <i class="bi bi-send me-2"></i>Kirim Pesan
+                                </button>
+                            </div>
                         </div>
-                        <div class="loading">Memproses...</div>
-                        <div class="error-message"></div>
-                        <div class="sent-message">Permintaan langganan Anda telah dikirim. Terima kasih!</div>
                     </form>
                 </div>
             </div>

@@ -22,7 +22,7 @@
                         <input type="text" name="nama" class="form-control form-control-lg rounded-3" required>
                     </div>
                     <div class="col-md-3">
-                        <label class="form-label">Umur (bulan)</label>
+                        <label class="form-label">Umur (tahun)</label>
                         <input type="number" name="umur" class="form-control form-control-lg rounded-3" required>
                     </div>
                     <div class="col-md-3">

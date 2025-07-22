@@ -1,22 +1,23 @@
 <?php
 
-use App\Http\Controllers\AboutController;
+use App\Models\User;
+use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AkunController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\ArtikelController;
-use App\Http\Controllers\KonsulController;
-use App\Http\Controllers\StatusController;
-use App\Http\Controllers\WelcomeController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
-use App\Models\User;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
+use App\Http\Controllers\KonsulController;
+use App\Http\Controllers\KontakController;
+use App\Http\Controllers\StatusController;
+use App\Http\Controllers\ArtikelController;
+use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\AdminProfileController;
 
 // Khusu User
 Route::middleware(['auth', 'role:user'])->group(function () {
@@ -24,7 +25,6 @@ Route::middleware(['auth', 'role:user'])->group(function () {
     Route::get('/akun', [AkunController::class, 'index'])->name('akun.index');
     Route::post('/akun', [AkunController::class, 'update'])->name('akun.update');
     Route::post('/profile/change-password', [AuthController::class, 'changePassword'])->name('profile.change-password');
-    Route::get('/about', [AboutController::class, 'index']);
     Route::get('/artikel', [ArtikelController::class, 'index'])->name('user.artikel');
     Route::get('/artikel/baca/{id}', [ArtikelController::class, 'baca'])->name('artikel.baca');
     Route::get('/status', [StatusController::class, 'index'])->name('status.index');
@@ -58,9 +58,11 @@ Route::get('/admin/logout', [AuthController::class, 'logout']);
 
 // Khusu Auth
 Route::middleware(['guest'])->group(function () {
-    // Akses Landing Page 
-
+    // Akses Landing Page dan About page
     Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/about', [AboutController::class, 'index']);
+    // Route untuk kirim pesan di footer
+    Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
 
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login', [AuthController::class, 'store']);
