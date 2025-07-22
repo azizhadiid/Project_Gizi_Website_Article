@@ -30,7 +30,7 @@
     <link href="{{ asset('assets/css/main.css') }}" rel="stylesheet">
 
     <!-- My Style -->
-   <link href="{{ asset('assets/css/welcome.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/welcome.css') }}" rel="stylesheet">
 </head>
 
 <body class="index-page">

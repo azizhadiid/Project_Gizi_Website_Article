@@ -50,64 +50,60 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
     Route::put('/admin/konsul/{id}/update-status', [KonsulController::class, 'updateStatus'])->name('adminKonsul.updateStatus');
 });
 
-
-
 Route::get('/logout', [AuthController::class, 'logout']);
 Route::get('/admin/logout', [AuthController::class, 'logout']);
 
-
 // Khusu Auth
-Route::middleware(['guest'])->group(function () {
-    // Akses Landing Page dan About page
-    Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-    Route::get('/about', [AboutController::class, 'index']);
-    // Route untuk kirim pesan di footer
-    Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
 
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::post('/login', [AuthController::class, 'store']);
-    Route::get('/register', [AuthController::class, 'register']);
-    Route::post('/register/create', [AuthController::class, 'create']);
-    Route::get('/forgot-password', function () {
-        return view('auth.forgotPassword');
-    })->name('password.request');
-    Route::post('/forgot-password', function (Request $request) {
-        $request->validate(['email' => 'required|email']);
+// Akses Landing Page dan About page
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+Route::get('/about', [AboutController::class, 'index']);
+// Route untuk kirim pesan di footer
+Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'store']);
+Route::get('/register', [AuthController::class, 'register']);
+Route::post('/register/create', [AuthController::class, 'create']);
+Route::get('/forgot-password', function () {
+    return view('auth.forgotPassword');
+})->name('password.request');
+Route::post('/forgot-password', function (Request $request) {
+    $request->validate(['email' => 'required|email']);
 
-        return $status === Password::ResetLinkSent
-            ? back()->with(['status' => __($status)])
-            : back()->withErrors(['email' => __($status)]);
-    })->name('password.email');
-    Route::get('/reset-password/{token}', function (string $token) {
-        return view('auth.resetPassword', ['token' => $token]);
-    })->name('password.reset');
-    Route::post('/reset-password', function (Request $request) {
-        $request->validate([
-            'token' => 'required',
-            'email' => 'required|email',
-            'password' => 'required|min:8|confirmed',
-        ]);
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
 
-        $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
-            function (User $user, string $password) {
-                $user->forceFill([
-                    'password' => Hash::make($password)
-                ])->setRememberToken(Str::random(60));
+    return $status === Password::ResetLinkSent
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
+})->name('password.email');
+Route::get('/reset-password/{token}', function (string $token) {
+    return view('auth.resetPassword', ['token' => $token]);
+})->name('password.reset');
+Route::post('/reset-password', function (Request $request) {
+    $request->validate([
+        'token' => 'required',
+        'email' => 'required|email',
+        'password' => 'required|min:8|confirmed',
+    ]);
 
-                $user->save();
+    $status = Password::reset(
+        $request->only('email', 'password', 'password_confirmation', 'token'),
+        function (User $user, string $password) {
+            $user->forceFill([
+                'password' => Hash::make($password)
+            ])->setRememberToken(Str::random(60));
 
-                event(new PasswordReset($user));
-            }
-        );
+            $user->save();
 
-        return $status === Password::PasswordReset
-            ? redirect()->route('login')->with('status', __($status))
-            : back()->withErrors(['email' => [__($status)]]);
-    })->name('password.update');
-    Route::get('/reset-password', [AuthController::class, 'resetPassword']);
-});
+            event(new PasswordReset($user));
+        }
+    );
+
+    return $status === Password::PasswordReset
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
+})->name('password.update');
+Route::get('/reset-password', [AuthController::class, 'resetPassword']);
