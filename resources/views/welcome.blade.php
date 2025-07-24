@@ -50,7 +50,7 @@
                     <li><a href="{{url('/about')}}">Tentang Kami</a></li>
                     <li><a href="{{url('/artikel')}}">Artikel Gizi</a></li>
                     <li><a href="{{url('/status')}}">Cek Status Gizi</a></li>
-                    <li><a href="p{{url('/konsul')}}">Konsultasi</a></li>
+                    <li><a href="{{url('/konsul')}}">Konsultasi</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
             </nav>

@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AkunController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $user = Auth::user();
@@ -19,54 +16,16 @@ class AkunController extends Controller
         return view('akun', compact('user', 'userProfile'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request)
     {
         $userProfile = Auth::user()->userProfile;
 
         // Validasi data
         $request->validate([
-            'first_name' => 'nullable|string|max:255',
-            'last_name' => 'nullable|string|max:255',
             'education' => 'nullable|string|max:255',
             'job' => 'nullable|string|max:255',
             'disease_history' => 'nullable|string',
             'phone' => 'nullable|string|max:20',
-            'email' => 'nullable|string|max:255',
             'address' => 'nullable|string|max:255',
             'country' => 'nullable|string|max:255',
             'instagram' => 'nullable|string|max:255',
@@ -74,6 +33,11 @@ class AkunController extends Controller
             'facebook' => 'nullable|string|max:255',
             'linkedin' => 'nullable|string|max:255',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ], [
+            'profile_picture.image' => 'Foto profil harus berupa gambar.',
+            'profile_picture.mimes' => 'Format gambar harus jpeg, png, atau jpg.',
+            'profile_picture.max' => 'Ukuran gambar maksimal 2MB.',
+            'phone.max' => 'Nomor telepon maksimal 20 karakter.',
         ]);
 
         // Update atau buat data profil
@@ -104,13 +68,5 @@ class AkunController extends Controller
         $userProfile->save();
 
         return redirect()->route('akun.index')->with('success', 'Profile updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

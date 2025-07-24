@@ -14,13 +14,10 @@ return new class extends Migration
         Schema::create('profile_user', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // relasi ke tabel users
-            $table->string('first_name')->nullable();
-            $table->string('last_name')->nullable();
             $table->string('education')->nullable();
             $table->string('job')->nullable();
             $table->text('disease_history')->nullable(); // Riwayat penyakit
             $table->string('phone', 20)->nullable();
-            $table->string('email')->nullable(); // jika ingin simpan juga di sini selain tabel users
             $table->string('address')->nullable();
             $table->string('country', 100)->nullable();
 

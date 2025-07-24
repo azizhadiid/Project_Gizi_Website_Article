@@ -55,17 +55,14 @@
                 <div class="row gy-4">
                     <div class="col-12">
                         <div class="card widget-card border-light shadow-sm">
-                            <div class="card-header text-bg-success">Selamat Datang,
-                                {{ old('first_name', $userProfile->first_name ?? '') }}
-                                {{ old('last_name', $userProfile->last_name ?? '') }}</div>
+                            <div class="card-header text-bg-success">Selamat Datang, {{ $user->name ?? '' }}</div>
                             <div class="card-body">
                                 <div class="text-center mb-3">
-                                    <img src="{{ $userProfile && $userProfile->profile_picture ? asset('img/user/profile/' . $userProfile->profile_picture) : asset('img/default.png') }}"
+                                    <img src="{{ $userProfile && $userProfile->profile_picture ? asset('img/user/profile/' . $userProfile->profile_picture) : asset('img/user/profile/profile.jpg') }}"
                                         class="rounded-circle img-thumbnail" alt="Ethan Leo"
                                         style="width: 150px; height: 150px; object-fit: cover;">
                                 </div>
-                                <h5 class="text-center mb-1">{{ old('first_name', $userProfile->first_name ?? '') }}
-                                    {{ old('last_name', $userProfile->last_name ?? '') }}</h5>
+                                <h5 class="text-center mb-1">{{ $user->name ?? '' }}</h5>
                                 <p class="text-center text-secondary mb-4">{{ old('job', $userProfile->job ?? '') }}</p>
                             </div>
                         </div>
@@ -124,18 +121,25 @@
                                 <h5 class="mb-3">Profile</h5>
                                 <div class="row g-0">
                                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Nama Depan</div>
+                                        <div class="p-2">Nama</div>
                                     </div>
                                     <div
                                         class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">{{ old('first_name', $userProfile->first_name ?? '') }}</div>
+                                        <div class="p-2">{{ $user->name ?? '' }}</div>
                                     </div>
                                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Nama Belakang</div>
+                                        <div class="p-2">Email</div>
                                     </div>
                                     <div
                                         class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">{{ old('last_name', $userProfile->last_name ?? '') }}</div>
+                                        <div class="p-2">{{ $user->email ?? '' }}</div>
+                                    </div>
+                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
+                                        <div class="p-2">No HP</div>
+                                    </div>
+                                    <div
+                                        class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
+                                        <div class="p-2">{{ old('phone', $userProfile->phone ?? '') }}</div>
                                     </div>
                                     <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
                                         <div class="p-2">Pendidikan</div>
@@ -173,23 +177,10 @@
                                         <div class="p-2">
                                             {{ old('disease_history', $userProfile->disease_history ?? '') }}</div>
                                     </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">No HP</div>
-                                    </div>
-                                    <div
-                                        class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">{{ old('phone', $userProfile->phone ?? '') }}</div>
-                                    </div>
-                                    <div class="col-5 col-md-3 bg-light border-bottom border-white border-3">
-                                        <div class="p-2">Email</div>
-                                    </div>
-                                    <div
-                                        class="col-7 col-md-9 bg-light border-start border-bottom border-white border-3">
-                                        <div class="p-2">{{ old('email', $userProfile->email ?? '') }}</div>
-                                    </div>
                                 </div>
                                 <div class="mt-3 d-flex justify-content-end">
-                                    <a class="btn btn-danger logout" style="font-weight: 600" href="{{url('/logout')}}">Logout</a>
+                                    <a class="btn btn-danger logout" style="font-weight: 600"
+                                        href="{{url('/logout')}}">Logout</a>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel"
@@ -201,8 +192,8 @@
                                         <div class="row gy-2">
                                             <label class="col-12 form-label m-0">Foto Profil</label>
                                             <div class="col-12">
-                                                <img src="{{ $userProfile && $userProfile->profile_picture ? asset('img/user/profile/' . $userProfile->profile_picture) : asset('img/default.png') }}"
-                                                    class="img-fluid" alt="User Name">
+                                                <img src="{{ $userProfile && $userProfile->profile_picture ? asset('img/user/profile/' . $userProfile->profile_picture) : asset('img/user/profile/profile.jpg') }}"
+                                                    class="img-fluid" alt="User Name" id="profilePreview">
                                             </div>
                                             <div class="col-12 d-flex gap-2">
                                                 <!-- Tombol Upload -->
@@ -219,46 +210,64 @@
                                                     class="d-inline-block bg-danger link-light lh-1 p-2 rounded border-0">
                                                     <i class="bi bi-trash"></i>
                                                 </button>
+
+                                                {{-- JS Untuk hapus gambar --}}
+                                                <script>
+                                                    document.addEventListener('DOMContentLoaded', function () {
+                                                        const deleteBtn = document.getElementById(
+                                                            'deletePhotoBtn');
+                                                        const profileImg = document.getElementById(
+                                                            'profilePreview');
+
+                                                        const defaultImage =
+                                                            "{{ asset('img/user/profile/profile.jpg') }}";
+
+                                                        deleteBtn.addEventListener('click', function () {
+                                                            // Cek apakah gambar sekarang bukan gambar default
+                                                            if (profileImg.src !== defaultImage) {
+                                                                profileImg.src = defaultImage;
+
+                                                                // Optional: Kosongkan input file jika sebelumnya upload
+                                                                const fileInput = document
+                                                                    .getElementById('uploadFoto');
+                                                                if (fileInput) fileInput.value = '';
+
+                                                                // Optional: Tambahkan hidden input ke form untuk tandai penghapusan (kalau perlu backend tahu)
+                                                                if (!document.getElementById(
+                                                                        'deletePhotoFlag')) {
+                                                                    const hiddenInput = document
+                                                                        .createElement('input');
+                                                                    hiddenInput.type = 'hidden';
+                                                                    hiddenInput.name =
+                                                                        'delete_profile_picture';
+                                                                    hiddenInput.value = '1';
+                                                                    hiddenInput.id = 'deletePhotoFlag';
+                                                                    fileInput.parentNode.appendChild(
+                                                                        hiddenInput);
+                                                                }
+                                                            }
+                                                        });
+                                                    });
+
+                                                </script>
+
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <label for="inputFirstName" class="form-label">Nama Depan</label>
+                                        <label for="inputFirstName" class="form-label">Nama</label>
                                         <input type="text" class="form-control" id="inputFirstName"
-                                            value="{{ old('first_name', $userProfile->first_name ?? '') }}"
-                                            name="first_name">
+                                            value="{{ $user->name ?? '' }}" readonly>
                                     </div>
                                     <div class="col-12 col-md-6">
-                                        <label for="inputLastName" class="form-label">Nama Belakang</label>
-                                        <input type="text" class="form-control" id="inputLastName"
-                                            value="{{ old('last_name', $userProfile->last_name ?? '') }}"
-                                            name="last_name">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputEducation" class="form-label">Pendidikan</label>
-                                        <input type="text" class="form-control" id="inputEducation"
-                                            value="{{ old('education', $userProfile->education ?? '') }}"
-                                            name="education">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputJob" class="form-label">Pekerjaan</label>
-                                        <input type="text" class="form-control" id="inputJob"
-                                            value="{{ old('job', $userProfile->job ?? '') }}" name="job">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="riwayatPenyakit" class="form-label">Riwayat Penyakit</label>
-                                        <textarea class="form-control" id="riwayatPenyakit"
-                                            name="disease_history">{{ old('disease_history', $userProfile->disease_history ?? '') }}</textarea>
+                                        <label for="inputEmail" class="form-label">Email</label>
+                                        <input type="email" class="form-control" id="inputEmail" name="email"
+                                            value="{{ $user->email ?? '' }}" readonly>
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputPhone" class="form-label">Phone</label>
                                         <input type="text" class="form-control" id="inputPhone" name="phone"
                                             value="{{ old('phone', $userProfile->phone ?? '') }}">
-                                    </div>
-                                    <div class="col-12 col-md-6">
-                                        <label for="inputEmail" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="inputEmail" name="email"
-                                            value="{{ old('email', $userProfile->email ?? '') }}">
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label for="inputAddress" class="form-label">Alamat</label>
@@ -295,6 +304,39 @@
                                         </select>
                                     </div>
                                     <div class="col-12 col-md-6">
+                                        <label for="inputEducation" class="form-label">Pendidikan</label>
+                                        <select class="form-select" id="inputEducation" name="education">
+                                            <option value="Indonesia"
+                                                {{ old('country', $userProfile->education ?? '') == 'SMP/Sederajat' ? 'selected' : '' }}>
+                                                SMP/Sederajat</option>
+                                            <option value="Malaysia"
+                                                {{ old('education', $userProfile->education ?? '') == 'SMA/Sederajat' ? 'selected' : '' }}>
+                                                SMA/Sederajat</option>
+                                            <option value="Singapore"
+                                                {{ old('education', $userProfile->education ?? '') == 'D1/D2/D3' ? 'selected' : '' }}>
+                                                D1/D2/D3</option>
+                                            <option value="Vietname"
+                                                {{ old('education', $userProfile->education ?? '') == 'D4/S1' ? 'selected' : '' }}>
+                                                D4/S1</option>
+                                            <option value="Thailand"
+                                                {{ old('education', $userProfile->education ?? '') == 'S2' ? 'selected' : '' }}>
+                                                S2</option>
+                                            <option value="Japan"
+                                                {{ old('education', $userProfile->education ?? '') == 'S3' ? 'selected' : '' }}>
+                                                S3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="inputJob" class="form-label">Pekerjaan</label>
+                                        <input type="text" class="form-control" id="inputJob"
+                                            value="{{ old('job', $userProfile->job ?? '') }}" name="job">
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label for="riwayatPenyakit" class="form-label">Riwayat Penyakit</label>
+                                        <textarea class="form-control" id="riwayatPenyakit"
+                                            name="disease_history">{{ old('disease_history', $userProfile->disease_history ?? '') }}</textarea>
+                                    </div>
+                                    <div class="col-12 col-md-6">
                                         <label for="inputYouTube" class="form-label">Instagram</label>
                                         <input type="text" class="form-control" id="inputYouTube" name="instagram"
                                             value="{{ old('instagram', $userProfile->instagram ?? '') }}">
@@ -326,15 +368,18 @@
                                     <div class="row gy-3 gy-xxl-4">
                                         <div class="col-12">
                                             <label for="currentPassword" class="form-label">Password Saat Ini</label>
-                                            <input type="password" class="form-control" id="currentPassword" name="current_password">
+                                            <input type="password" class="form-control" id="currentPassword"
+                                                name="current_password">
                                         </div>
                                         <div class="col-12">
                                             <label for="newPassword" class="form-label">Password Baru</label>
-                                            <input type="password" class="form-control" id="newPassword" name="new_password" required>
+                                            <input type="password" class="form-control" id="newPassword"
+                                                name="new_password" required>
                                         </div>
                                         <div class="col-12">
                                             <label for="confirmPassword" class="form-label">Konfirmasi Password</label>
-                                            <input type="password" class="form-control" id="confirmPassword" name="new_password_confirmation" required>
+                                            <input type="password" class="form-control" id="confirmPassword"
+                                                name="new_password_confirmation" required>
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-success">Ubah Password</button>
