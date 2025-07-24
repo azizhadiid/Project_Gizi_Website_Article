@@ -46,10 +46,8 @@
 
             <nav id="navmenu" class="navmenu">
                 <ul>
-                    <li><a href="{{ url('/beranda') }}"
-                            class="{{ request()->is('beranda') ? 'active' : '' }}">Beranda</a></li>
-                    <li><a href="{{ url('/about') }}" class="{{ request()->is('about') ? 'active' : '' }}">Tentang
-                            Kami</a></li>
+                    <li><a href="{{ url('/beranda') }}" class="nav-link {{ request()->is('beranda') ? 'active' : '' }}"
+                            id="link-beranda">Beranda</a></li>
                     <li><a href="{{ url('/artikel') }}" class="{{ request()->is('artikel*') ? 'active' : '' }}">Artikel
                             Gizi</a></li>
                     <li><a href="{{ url('/status') }}" class="{{ request()->is('status') ? 'active' : '' }}">Cek Status

@@ -56,8 +56,7 @@ Route::get('/admin/logout', [AuthController::class, 'logout']);
 // Khusu Auth
 
 // Akses Landing Page dan About page
-Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
-Route::get('/about', [AboutController::class, 'index']);
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome'); 
 // Route untuk kirim pesan di footer
 Route::post('/kontak/kirim', [KontakController::class, 'kirim'])->name('kontak.kirim');
 

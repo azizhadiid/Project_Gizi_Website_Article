@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const logoutButton = document.querySelector(".logout"); // Ambil tombol logout
+    // 🔒 Logout confirmation
+    const logoutButton = document.querySelector(".logout");
     
-    if (logoutButton) { // Pastikan tombol ada
+    if (logoutButton) {
         logoutButton.addEventListener("click", function (event) {
-            event.preventDefault(); // Mencegah logout langsung
-            const logoutUrl = this.getAttribute("href"); // Ambil URL logout
-            
+            event.preventDefault();
+            const logoutUrl = this.getAttribute("href");
+
             Swal.fire({
                 title: "Apakah Anda yakin ingin logout?",
                 text: "Anda akan keluar dari sesi saat ini.",
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 cancelButtonText: "Batal"
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = logoutUrl; // Redirect jika dikonfirmasi
+                    window.location.href = logoutUrl;
                 }
             });
         });
