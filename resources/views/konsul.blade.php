@@ -45,17 +45,6 @@
                 @csrf
                 <div class="row g-4">
                     <div class="col-md-6">
-                        <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" id="nama" class="form-control form-control-lg rounded-3"
-                            placeholder="Nama lengkap Anda" required name="full_name">
-                    </div>
-                    <div class="col-md-6">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" class="form-control form-control-lg rounded-3"
-                            placeholder="email@example.com" required name="email">
-                    </div>
-
-                    <div class="col-md-6">
                         <label for="umur" class="form-label">Umur</label>
                         <input type="number" id="umur" class="form-control form-control-lg rounded-3"
                             placeholder="12" required name="umur">
@@ -103,7 +92,6 @@
     </div>
 
     {{-- Tabel Riwayat --}}
-    {{-- @if(isset($hasil)) --}}
     <div class="card border-0 shadow-sm rounded-4" data-aos="fade-up">
         <div class="card-body p-4">
             <h5 class="fw-bold mb-3 text-success">Riwayat Konsultasi</h5>
@@ -112,7 +100,6 @@
                     <thead class="table-light">
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
                             <th>Jenis Konsultasi</th>
                             <th>Tanggal</th>
                             <th>Status</th>
@@ -121,7 +108,6 @@
                     @forelse ($konsultasi as $konsul)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $konsul->full_name }}</td>
                         <td>{{ ucfirst($konsul->jenis_konsultasi) }}</td>
                         <td>{{ \Carbon\Carbon::parse($konsul->tanggal_konsultasi)->format('Y-m-d') }}</td>
                         <td>
@@ -146,7 +132,6 @@
 
         </div>
     </div>
-    {{-- @endif --}}
 
 </div>
 @endsection

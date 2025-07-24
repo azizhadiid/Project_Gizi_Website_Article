@@ -66,7 +66,7 @@
                                 @csrf
                                 <div class="form-group">
                                     <input type="text" class="form-control form-control-lg" id="exampleInputUsername1"
-                                        placeholder="Masukkan Nama Pengguna" name="name" required>
+                                        placeholder="Masukkan Nama Lengkap" name="name" required>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-lg" id="exampleInputEmail1"

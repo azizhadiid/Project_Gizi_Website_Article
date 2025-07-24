@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('konsul', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // relasi ke users, role: admin
-            $table->string('full_name')->nullable();
-            $table->string('email')->nullable();
             $table->string('jenis_konsultasi')->nullable();
             $table->date('tanggal_konsultasi')->nullable();
             $table->string('umur')->nullable();

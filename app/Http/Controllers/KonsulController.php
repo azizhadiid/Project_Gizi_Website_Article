@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\Auth;
 
 class KonsulController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $user = Auth::user();
@@ -49,32 +46,28 @@ class KonsulController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $request->validate([
-            'full_name' => 'required|string',
-            'email' => 'required|email',
             'jenis_konsultasi' => 'required|string',
             'tanggal_konsultasi' => 'required|date',
             'umur' => 'required|string',
             'keluhan' => 'nullable|string',
+        ], [
+            'jenis_konsultasi.required' => 'Jenis konsultasi wajib dipilih.',
+            'jenis_konsultasi.string' => 'Jenis konsultasi harus berupa teks.',
+
+            'tanggal_konsultasi.required' => 'Tanggal konsultasi wajib diisi.',
+            'tanggal_konsultasi.date' => 'Format tanggal konsultasi tidak valid.',
+
+            'umur.required' => 'Umur wajib diisi.',
+            'umur.string' => 'Umur harus berupa teks atau angka.',
+
+            'keluhan.string' => 'Keluhan harus berupa teks.',
         ]);
 
         Konsultasi::create([
             'user_id' => Auth::id(), // ambil ID user yang sedang login
-            'full_name' => $request->full_name,
-            'email' => $request->email,
             'jenis_konsultasi' => $request->jenis_konsultasi,
             'tanggal_konsultasi' => $request->tanggal_konsultasi,
             'umur' => $request->umur,
@@ -83,37 +76,5 @@ class KonsulController extends Controller
         ]);
 
         return redirect()->route('konsul.index')->with('success', 'Data konsultasi berhasil dikirim.');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

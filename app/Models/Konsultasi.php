@@ -12,8 +12,6 @@ class Konsultasi extends Model
     protected $table = 'konsul'; // nama tabel
     protected $fillable = [
         'user_id',
-        'full_name',
-        'email',
         'jenis_konsultasi',
         'tanggal_konsultasi',
         'umur',
