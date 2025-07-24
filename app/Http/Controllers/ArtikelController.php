@@ -9,9 +9,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ArtikelController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(Request $request)
     {
         $query = Artikel::query()->where('status', 'published');
@@ -29,17 +26,11 @@ class ArtikelController extends Controller
         return view('artikel', compact('articles'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.tambahArtikel');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         $adminProfile = Auth::user()->adminProfile;
