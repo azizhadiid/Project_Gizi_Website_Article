@@ -123,19 +123,11 @@
                                 data: {
                                     labels: ['Anak-anak', 'Remaja', 'Dewasa'],
                                     datasets: [{
-                                        data: [{
-                                            {
-                                                $anak
-                                            }
-                                        }, {
-                                            {
-                                                $remaja
-                                            }
-                                        }, {
-                                            {
-                                                $dewasa
-                                            }
-                                        }],
+                                        data: [
+                                            {{ $anak }}, // Hapus kurung kurawal tambahan
+                                            {{ $remaja }}, // Hapus kurung kurawal tambahan
+                                            {{ $dewasa }} // Hapus kurung kurawal tambahan
+                                        ],
                                         backgroundColor: ['#ec4e62', '#6dd230', '#fdd762'],
                                         borderWidth: 0,
                                         hoverOffset: 6
