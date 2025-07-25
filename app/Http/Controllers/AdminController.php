@@ -16,13 +16,14 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $konsultasis = Konsultasi::latest()->take(10)->get(); // ambil 10 data terbaru
+        $konsultasi = Konsultasi::with('user.userProfile')->latest()->paginate(10); // ambil 10 data terbaru
 
         $jumlahBelumLengkap = UserProfile::where(function ($query) {
-            $query->whereNull('first_name')
-                ->orWhere('first_name', '')
-                ->orWhereNull('last_name')
-                ->orWhere('last_name', '');
+            $query->whereNull('education')->orWhere('education', '')
+                ->orWhereNull('job')->orWhere('job', '')
+                ->orWhereNull('phone')->orWhere('phone', '')
+                ->orWhereNull('address')->orWhere('address', '')
+                ->orWhereNull('country')->orWhere('country', '');
         })->count();
 
         $totalAnak = StatusGizi::count();
@@ -53,7 +54,7 @@ class AdminController extends Controller
             $chartData[] = $monthlyCounts[$i] ?? 0;
         }
 
-        return view('admin.dashboard', compact('chartData', 'anak', 'remaja', 'dewasa', 'totalHariIni', 'totalAnak', 'giziBuruk', 'giziNormal', 'belumLengkap', 'jumlahBelumLengkap', 'konsultasis'));
+        return view('admin.dashboard', compact('chartData', 'anak', 'remaja', 'dewasa', 'totalHariIni', 'totalAnak', 'giziBuruk', 'giziNormal', 'belumLengkap', 'konsultasi', 'jumlahBelumLengkap'));
     }
 
     /**

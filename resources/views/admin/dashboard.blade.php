@@ -225,12 +225,6 @@
                     <div class="col-md-12">
                         <div class="d-flex align-items-center justify-content-between mb-3">
                             <h5 class="fw-semibold text-primary">Ringkasan Gizi</h5>
-                            <div class="d-flex align-items-center">
-                                <span class="text-muted me-2">Terakhir diperbarui</span>
-                                <button class="btn btn-light btn-sm rounded-circle p-2">
-                                    <i class="icon-refresh"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -311,16 +305,18 @@
                                 <th>Topik</th>
                                 <th>Tanggal Konsultasi</th>
                                 <th>Status</th>
-                                <th>Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse($konsultasis as $konsul)
+                            @forelse($konsultasi as $konsul)
                             <tr>
                                 <td>
+                                    @php
+                                    $foto = $konsul->user->userProfile->profile_picture ?? 'profile.jpg';
+                                    @endphp
                                     <img class="img-sm rounded-circle me-2"
-                                        src="{{ asset('assets/images/faces/face1.jpg') }}" alt="profile image">
-                                    {{ $konsul->full_name }}
+                                        src="{{ asset('img/user/profile/' . $foto) }}" alt="profile image">
+                                    {{ $konsul->user->name ?? '-' }}
                                 </td>
                                 <td>{{ $konsul->jenis_konsultasi }}</td>
                                 <td>{{ \Carbon\Carbon::parse($konsul->tanggal_konsultasi)->translatedFormat('d F Y') }}
@@ -336,10 +332,6 @@
                                     <span class="badge bg-secondary p-2 rounded-3">Tidak Diketahui</span>
                                     @endif
                                 </td>
-                                <td>
-                                    <a href=""
-                                        class="btn btn-sm btn-outline-primary">Lihat</a>
-                                </td>
                             </tr>
                             @empty
                             <tr>
@@ -352,17 +344,8 @@
                 </div>
 
                 <div class="d-flex mt-4 flex-wrap align-items-center">
-                    <p class="text-muted mb-sm-0">Menampilkan 1 sampai 4 dari 57 konsultasi</p>
                     <nav class="ms-auto">
-                        <ul class="pagination pagination-sm mb-sm-0">
-                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-left"></i></a></li>
-                            <li class="page-item active"><a href="#" class="page-link">1</a></li>
-                            <li class="page-item"><a href="#" class="page-link">2</a></li>
-                            <li class="page-item"><a href="#" class="page-link">3</a></li>
-                            <li class="page-item"><a href="#" class="page-link">4</a></li>
-                            <li class="page-item"><a href="#" class="page-link"><i class="icon-arrow-right"></i></a>
-                            </li>
-                        </ul>
+                        {{ $konsultasi->links('pagination::bootstrap-5') }}
                     </nav>
                 </div>
             </div>
