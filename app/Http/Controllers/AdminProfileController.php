@@ -8,50 +8,14 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminProfileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Menampilkan halaman profile admin
     public function index()
     {
         $admin = Auth::user()->admin; // Mengambil admin profile dari user yang login
         return view('admin.akun', compact('admin'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
+    // Melakukan update profile admin
     public function update(Request $request)
     {
         $adminProfile = Auth::user()->adminProfile;
@@ -97,13 +61,5 @@ class AdminProfileController extends Controller
         $adminProfile->save();
 
         return redirect()->route('admin.profile.show')->with('success', 'Profile updated successfully.');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

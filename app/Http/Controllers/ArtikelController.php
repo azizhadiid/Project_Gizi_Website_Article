@@ -26,11 +26,13 @@ class ArtikelController extends Controller
         return view('artikel', compact('articles'));
     }
 
+    // Memanggila halaman tambah artikel
     public function create()
     {
         return view('admin.tambahArtikel');
     }
 
+    // Menyimpan artikel ke DB
     public function store(Request $request)
     {
         $adminProfile = Auth::user()->adminProfile;
@@ -102,14 +104,14 @@ class ArtikelController extends Controller
     }
 
 
-    // Tampilkan form edit
+    // Tampilkan form edit artikel
     public function edit($id)
     {
         $article = Artikel::findOrFail($id);
         return view('admin.formEditArtikel', compact('article'));
     }
 
-    // Proses update
+    // Proses update artikel
     public function updateArtikel(Request $request, $id)
     {
         $article = Artikel::findOrFail($id);
@@ -147,7 +149,7 @@ class ArtikelController extends Controller
         return redirect()->route('artikel.index')->with('success', 'Artikel berhasil diperbarui.');
     }
 
-    // Proses hapus
+    // Proses hapus artikel
     public function destroy($id)
     {
         $article = Artikel::findOrFail($id);
