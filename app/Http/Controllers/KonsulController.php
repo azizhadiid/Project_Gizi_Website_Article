@@ -16,12 +16,19 @@ class KonsulController extends Controller
         return view('konsul', compact('user', 'konsultasi'));
     }
 
-    public function admin()
+    public function admin(Request $request)
     {
-        $konsultasis = Konsultasi::with(['user'])
+        // Ambil nilai pencarian dari request
+        $search = $request->input('search');
+
+        $konsultasis = Konsultasi::with(['user.userProfile'])
             ->latest()
-            ->take(10)
-            ->get();
+            ->when($search, function ($query, $search) {
+                $query->whereHas('user', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                })->orWhere('jenis_konsultasi', 'like', '%' . $search . '%');
+            })
+            ->paginate(10); // Gunakan paginate, misalnya 10 item per halaman
 
         return view('admin.konsul', compact('konsultasis'));
     }
